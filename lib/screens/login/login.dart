@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:khoaluan_mobile_app/screens/login/login_view_model.dart';
 import 'package:provider/provider.dart';
 
-
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -11,7 +10,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -25,7 +23,7 @@ class _LoginState extends State<Login> {
           children: [
             TextFormField(
               controller: emailController,
-              onChanged: (value){
+              onChanged: (value) {
                 viewModel.email = value;
               },
               decoration: InputDecoration(
@@ -34,7 +32,7 @@ class _LoginState extends State<Login> {
             ),
             TextFormField(
               controller: passwordController,
-              onChanged: (value){
+              onChanged: (value) {
                 viewModel.password = value;
               },
               decoration: InputDecoration(
@@ -42,14 +40,12 @@ class _LoginState extends State<Login> {
               ),
             ),
             ElevatedButton(
-                onPressed: (){
-                  viewModel.login(
-                    successCallback: (message){
-                      print(message);
-                    }
-                  );
-                }, child: Text('Đăng nhập')
-            )
+                onPressed: () {
+                  viewModel.login(successCallback: (message) {
+                    print(message);
+                  });
+                },
+                child: Text('Đăng nhập'))
           ],
         ),
       ),
