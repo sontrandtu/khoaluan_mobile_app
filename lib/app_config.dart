@@ -1,6 +1,6 @@
 class AppConfig {
   AppConfig._();
-  static const prefixUrl = 'https://dominhduong.weuptech.vn/cms/api/v1';
+  static const prefixUrl = 'http://localhost:3000/api';
   static const prefixYoutubeUrl = 'https://www.googleapis.com/youtube/v3';
   static const prefixUrlV2 = 'https://dominhduong.com/wp-json/wp/v2';
   // static const prefixUrl = 'https://erp.dominhduong.com/api1';
