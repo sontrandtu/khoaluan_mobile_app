@@ -23,7 +23,7 @@ class AppStyles {
       bodyText1: TextStyle(
           fontFamily: Roboto, fontSize: 14, color: AppColors.textDark),
       bodyText2: TextStyle(
-          fontFamily: Roboto, fontSize: 12, color: AppColors.textDark),
+          fontFamily: Roboto, fontSize: 14, color: AppColors.textDark),
       subtitle1: TextStyle(
           fontFamily: Roboto, fontSize: 14, color: AppColors.textDark),
       subtitle2: TextStyle(

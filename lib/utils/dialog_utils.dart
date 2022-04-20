@@ -199,9 +199,9 @@ showAlertSignUp(
             border: Border.all(width: 1.0, color: AppColors.primaryColor)),
       ),
       onTap: () {
-        Navigator.pushNamedAndRemoveUntil(context, PageRoutes.signInNew,
-            ModalRoute.withName(PageRoutes.enterPhoneNumber));
-        FramePhase.buildFinish;
+        // Navigator.pushNamedAndRemoveUntil(context, PageRoutes.signInNew,
+        //     ModalRoute.withName(PageRoutes.enterPhoneNumber));
+        // FramePhase.buildFinish;
       });
 
   AlertDialog dialog = AlertDialog(
