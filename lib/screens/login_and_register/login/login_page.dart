@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 
 import '../../../widgets/buttons/custom_default_button.dart';
 import '../../../widgets/field/custom_input_field.dart';
-import '../component/circle_decoration.dart';
-import '../component/hero_title.dart';
+import '../components/circle_decoration.dart';
+import '../components/hero_title.dart';
 import 'login_view_model.dart';
 
 class LoginPage extends StatefulWidget {
@@ -81,9 +81,14 @@ class _LoginPageState extends State<LoginPage> {
                       CustomDefaultButton(
                         onTap: () {
                           if (loginKey.currentState!.validate()) {
-                            // viewModel.login(successCallback: (message) {
-                            //   print(message);
-                            // });
+                            viewModel.login(
+                              successCallback: (message) {
+                                print(message);
+                              },
+                              errorCallback: (error) {
+                                print(error);
+                              },
+                            );
                           }
                           print(usernameController.text);
                           print(passwordController.text);
