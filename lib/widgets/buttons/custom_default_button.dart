@@ -5,8 +5,8 @@ import '../../theme/color.dart';
 class CustomDefaultButton extends StatelessWidget {
   final String? title;
   final double? height; //height of button
-  final double? padding;
-  final GestureTapCallback? onTap; // horizontal padding of button
+  final double? padding; // horizontal padding of button
+  final GestureTapCallback? onTap;
   const CustomDefaultButton({
     Key? key,
     this.title,

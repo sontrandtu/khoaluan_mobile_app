@@ -8,14 +8,14 @@ class HeroTitle extends StatelessWidget {
     Key? key,
     this.title,
     this.content,
-    required this.image,
+    this.image,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(image!),
+        (image == null) ? const SizedBox() : Image.asset(image!),
         const SizedBox(height: 20),
         Align(
           alignment: Alignment.centerLeft,

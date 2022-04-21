@@ -108,7 +108,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
                   child: SvgPicture.asset(
                     _obscureText ? Res.iconEyeClosed : Res.iconEye,
                     color: Colors.black45,
-                    height: _obscureText ? 22 : 14,
+                    height: _obscureText ? 18 : 12,
                   ),
                 ),
               )

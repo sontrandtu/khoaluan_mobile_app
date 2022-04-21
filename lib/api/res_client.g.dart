@@ -16,12 +16,12 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<UserModel>> login(email, password) async {
+  Future<HttpResponse<UserModel>> login({userModel}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = FormData();
-    _data.fields.add(MapEntry('email', email));
-    _data.fields.add(MapEntry('password', password));
+    queryParameters.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(userModel?.toJson() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<UserModel>>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)

@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:khoaluan_mobile_app/app_config.dart';
 import 'package:khoaluan_mobile_app/page_routes.dart';
 import 'package:khoaluan_mobile_app/repository/user_repository.dart';
+import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_page.dart';
+import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_view_model.dart';
 import 'package:khoaluan_mobile_app/theme/color.dart';
 import 'package:khoaluan_mobile_app/theme/style.dart';
 import 'package:provider/provider.dart';
@@ -81,6 +83,12 @@ _pageMap() {
         create: (_) => LoginViewModel(userRepo: context.watch()),
         child: const LoginPage(),
       );
-    }
+    },
+    PageRoutes.registerPage: (BuildContext context) {
+      return ChangeNotifierProvider(
+        create: (_) => RegisterViewModel(userRepo: context.watch()),
+        child: const RegisterPage(),
+      );
+    },
   };
 }

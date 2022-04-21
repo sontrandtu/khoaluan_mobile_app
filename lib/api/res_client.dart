@@ -11,13 +11,8 @@ const int pageSize = 20;
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
-  @MultiPart()
   @POST('/auth/login')
-  Future<HttpResponse<UserModel>> login(
-      @Part(name: "email") String email,
-      @Part(name: "password") String password,
-      );
-
+  Future<HttpResponse<UserModel>> login({@Body() UserModel? userModel});
 
 // @GET('/widgets/{slug}')
 // Future<HttpResponse<WidgetModel>> getWidgetsBySlug({
