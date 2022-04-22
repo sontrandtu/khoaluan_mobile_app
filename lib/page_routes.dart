@@ -2,6 +2,7 @@ class PageRoutes {
   PageRoutes._();
   static const loginPage = '/login';
   static const registerPage = '/register';
+  static const rootApp = '/root';
   // static const main = "/main";
   // static const signUp = "/sign_up_page";
   // static const signInNew = "/sign_in_new_page";

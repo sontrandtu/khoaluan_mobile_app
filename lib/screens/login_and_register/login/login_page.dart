@@ -89,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                             //     print(error);
                             //   },
                             // );
+                            Navigator.of(context).pushNamed(PageRoutes.rootApp);
                             context.showMessage(
                                 usernameController.text +
                                     "\n" +

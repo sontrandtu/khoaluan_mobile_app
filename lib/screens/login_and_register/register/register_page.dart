@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:khoaluan_mobile_app/utils/extensions/context_extension.dart';
 import 'package:khoaluan_mobile_app/widgets/buttons/custom_default_button.dart';
 
-import '../../../res.dart';
 import '../../../widgets/field/custom_input_field.dart';
-import '../component/hero_title.dart';
+import '../components/hero_title.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);

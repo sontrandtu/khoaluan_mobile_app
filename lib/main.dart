@@ -5,6 +5,7 @@ import 'package:khoaluan_mobile_app/page_routes.dart';
 import 'package:khoaluan_mobile_app/repository/user_repository.dart';
 import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_page.dart';
 import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_view_model.dart';
+import 'package:khoaluan_mobile_app/screens/root_app.dart';
 import 'package:khoaluan_mobile_app/theme/color.dart';
 import 'package:khoaluan_mobile_app/theme/style.dart';
 import 'package:provider/provider.dart';
@@ -54,17 +55,18 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: AppConfig.title,
       theme: ThemeData(
-          // Define the default brightness and colors.
-          primaryColor: AppColors.primaryColor,
-          primarySwatch: AppColors.primaryColor,
-          buttonTheme: theme.buttonTheme.copyWith(
-            buttonColor: AppColors.secondaryColor,
-            textTheme: ButtonTextTheme.primary,
-          ),
-          dividerColor: Colors.grey.withOpacity(0.1),
-          // Define the default font family.
-          fontFamily: 'Roboto',
-          textTheme: AppStyles.textTheme),
+        // Define the default brightness and colors.
+        primaryColor: AppColors.primaryColor,
+        primarySwatch: AppColors.primaryColor,
+        buttonTheme: theme.buttonTheme.copyWith(
+          buttonColor: AppColors.secondaryColor,
+          textTheme: ButtonTextTheme.primary,
+        ),
+        dividerColor: Colors.grey.withOpacity(0.1),
+        // Define the default font family.
+        fontFamily: 'Roboto',
+        textTheme: AppStyles.textTheme,
+      ),
       darkTheme: ThemeData.dark().copyWith(
         primaryColor: Colors.black45,
         cardColor: Colors.black87,
@@ -88,6 +90,12 @@ _pageMap() {
       return ChangeNotifierProvider(
         create: (_) => RegisterViewModel(userRepo: context.watch()),
         child: const RegisterPage(),
+      );
+    },
+    PageRoutes.rootApp: (BuildContext context) {
+      return ChangeNotifierProvider(
+        create: (_) => LoginViewModel(userRepo: context.watch()),
+        child: const RootApp(),
       );
     },
   };

@@ -145,6 +145,15 @@ flutter:
       fonts:
         - asset: assets/fonts/UTM_Conestoga.ttf
           weight: 700
+          # Quicksand font
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand/Quicksand-Bold.ttf
+        - asset: assets/fonts/Quicksand/Quicksand-Light.ttf
+        - asset: assets/fonts/Quicksand/Quicksand-Medium.ttf
+        - asset: assets/fonts/Quicksand/Quicksand-Regular.ttf
+        - asset: assets/fonts/Quicksand/Quicksand-SemiBold.ttf
+          weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -23,7 +23,6 @@ class HeroTitle extends StatelessWidget {
             title ?? '',
             style: const TextStyle(
               fontSize: 20,
-              fontFamily: 'RobotoSlab',
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -35,7 +34,6 @@ class HeroTitle extends StatelessWidget {
             content ?? '',
             style: const TextStyle(
               fontSize: 14,
-              fontFamily: 'Roboto',
               fontWeight: FontWeight.bold,
             ),
           ),

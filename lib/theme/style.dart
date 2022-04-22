@@ -7,6 +7,7 @@ class AppStyles {
 
   static const Roboto = "Roboto";
   static const RobotoSlab = "RobotoSlab";
+  static const quicksand = "Quicksand";
 
   static const boxShadow = BoxDecoration(
       color: Colors.white,
@@ -21,37 +22,37 @@ class AppStyles {
 
   static const textTheme = TextTheme(
       bodyText1: TextStyle(
-          fontFamily: Roboto, fontSize: 14, color: AppColors.textDark),
+          fontFamily: quicksand, fontSize: 14, color: AppColors.textDark),
       bodyText2: TextStyle(
-          fontFamily: Roboto, fontSize: 14, color: AppColors.textDark),
+          fontFamily: quicksand, fontSize: 14, color: AppColors.textDark),
       subtitle1: TextStyle(
-          fontFamily: Roboto, fontSize: 14, color: AppColors.textDark),
+          fontFamily: quicksand, fontSize: 14, color: AppColors.textDark),
       subtitle2: TextStyle(
-          fontFamily: Roboto, fontSize: 12, color: AppColors.textDark),
+          fontFamily: quicksand, fontSize: 12, color: AppColors.textDark),
       caption: TextStyle(
-          fontFamily: Roboto, fontSize: 10, color: AppColors.lightGrey),
+          fontFamily: quicksand, fontSize: 10, color: AppColors.lightGrey),
       headline6: TextStyle(
-          fontFamily: Roboto,
+          fontFamily: quicksand,
           fontSize: 16,
           fontWeight: FontWeight.bold,
           color: AppColors.textDark),
       headline5: TextStyle(
-          fontFamily: Roboto,
+          fontFamily: quicksand,
           fontSize: 18,
           fontWeight: FontWeight.bold,
           color: AppColors.textDark),
       headline4: TextStyle(
-          fontFamily: Roboto,
+          fontFamily: quicksand,
           fontSize: 24,
           fontWeight: FontWeight.bold,
           color: AppColors.textDark),
       headline3: TextStyle(
-          fontFamily: Roboto,
+          fontFamily: quicksand,
           fontSize: 26,
           fontWeight: FontWeight.bold,
           color: AppColors.textDark),
       headline2: TextStyle(
-          fontFamily: Roboto,
+          fontFamily: quicksand,
           fontSize: 30,
           fontWeight: FontWeight.w900,
           color: AppColors.textDark));
