@@ -24,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<LoginViewModel>();
     return GestureDetector(
       onTap: () {
         context.hideKeyboard();
@@ -36,107 +35,109 @@ class _LoginPageState extends State<LoginPage> {
           child: Stack(
             children: [
               Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Form(
-                  key: loginKey,
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 150),
-                      const HeroTitle(
-                        image: Res.mainLogo,
-                        content:
-                            "Sử dụng tên đăng nhập và mật khẩu đển sử dụng dịch vụ của chúng tôi",
-                        title: "Chào mừng bạn đến với FastRom",
-                      ),
-                      const SizedBox(height: 30),
-                      CustomInputField(
-                        labelWidget: const Text('Tên đăng nhập'),
-                        validator: (String? value) {
-                          if (value!.isEmpty) {
-                            return 'Vui lòng nhập tên tài khoản';
-                          }
-                          if (value.length < 6) {
-                            return 'Tên tài khoản quá ngắn';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      CustomInputField(
-                        labelWidget: const Text('Mật khẩu'),
-                        obscureText: true,
-                        validator: (String? value) {
-                          if (value!.isEmpty) {
-                            return 'Vui lòng nhập mật khẩu';
-                          }
-                          if (value.length < 6) {
-                            return 'Mật khẩu quá ngắn';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 30),
-                      CustomDefaultButton(
-                        onTap: () {
-                          if (loginKey.currentState!.validate()) {
-                            // viewModel.login(
-                            //   successCallback: (message) {
-                            //     print(message);
-                            //   },
-                            //   errorCallback: (error) {
-                            //     print(error);
-                            //   },
-                            // );
-                            Navigator.of(context).pushNamed(PageRoutes.rootApp);
-                            context.showMessage(
-                                usernameController.text +
-                                    "\n" +
-                                    passwordController.text,
-                                type: MessageType.success);
-                          }
-                          print(usernameController.text);
-                          print(passwordController.text);
-                        },
-                        height: 50,
-                        padding: 20,
-                        title: 'ĐĂNG NHẬP',
-                      ),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: const Text(
-                            'Quên mật khẩu',
-                            style: TextStyle(color: Colors.blue),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                child: Consumer<LoginViewModel>(
+                  builder: (context, viewModel, child) => Form(
+                    key: loginKey,
+                    child: Column(
+                      children: [
+                        SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+                        const HeroTitle(
+                          image: Res.mainLogo,
+                          content:
+                          "Sử dụng tên đăng nhập và mật khẩu đển sử dụng dịch vụ của chúng tôi",
+                          title: "Chào mừng bạn đến với FastRom",
+                        ),
+                        const SizedBox(height: 30),
+                        CustomInputField(
+                          value: "fjskdfjsdfkjdshjf",
+                          labelWidget: const Text('Tên đăng nhập'),
+                          validator: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'Vui lòng nhập tên tài khoản';
+                            }
+                            if (value.length < 6) {
+                              return 'Tên tài khoản quá ngắn';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) => viewModel.userName = value.trim(),
+                        ),
+                        const SizedBox(height: 20),
+                        CustomInputField(
+                          value: "dnkjfhskajfhaf",
+                          labelWidget: const Text('Mật khẩu'),
+                          obscureText: true,
+                          validator: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'Vui lòng nhập mật khẩu';
+                            }
+                            if (value.length < 6) {
+                              return 'Mật khẩu quá ngắn';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) => viewModel.password = value.trim(),
+                        ),
+                        const SizedBox(height: 30),
+                        CustomDefaultButton(
+                          onTap: () {
+                            if (loginKey.currentState!.validate()) {
+                              // viewModel.login(
+                              //   successCallback: (message) {
+                              //     print(message);
+                              //   },
+                              //   errorCallback: (error) {
+                              //     print(error);
+                              //   },
+                              // );
+                              Navigator.of(context).pushNamed(PageRoutes.rootApp);
+                              context.showMessage(
+                                  usernameController.text +
+                                      "\n" +
+                                      passwordController.text,
+                                  type: MessageType.success);
+                            }
+                          },
+                          height: 50,
+                          padding: 20,
+                          title: 'ĐĂNG NHẬP',
+                        ),
+                        const SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: const Text(
+                              'Quên mật khẩu',
+                              style: TextStyle(color: Colors.blue),
+                            ),
                           ),
                         ),
-                      ),
-                      Text.rich(
-                        TextSpan(
-                          style: const TextStyle(
-                              fontSize: 14, color: Colors.black),
-                          children: [
-                            const TextSpan(text: "Bạn chưa có tài khoản?"),
-                            WidgetSpan(
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context)
-                                      .pushNamed(PageRoutes.registerPage);
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 7),
-                                  child: Text("Đăng kí",
-                                      style: TextStyle(color: Colors.blue)),
+                        Text.rich(
+                          TextSpan(
+                            style: const TextStyle(
+                                fontSize: 14, color: Colors.black),
+                            children: [
+                              const TextSpan(text: "Bạn chưa có tài khoản?"),
+                              WidgetSpan(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .pushNamed(PageRoutes.registerPage);
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 7),
+                                    child: Text("Đăng kí",
+                                        style: TextStyle(color: Colors.blue)),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -1,9 +1,6 @@
 class AppConfig {
   AppConfig._();
-  static const prefixUrl = 'http://localhost:3000/api';
-  static const prefixYoutubeUrl = 'https://www.googleapis.com/youtube/v3';
-  static const prefixUrlV2 = 'https://dominhduong.com/wp-json/wp/v2';
-  // static const prefixUrl = 'https://erp.dominhduong.com/api1';
+  static const prefixUrl = 'http://10.0.2.2:3000/api';
   static const title = 'Nhà thuốc Nam dòng họ Đỗ minh đường';
   static const diseaseCategoryId = 1;
   static const channelId = "UCGK8NNm6oUCmKyDRHGD6cMw";

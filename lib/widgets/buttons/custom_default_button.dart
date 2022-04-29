@@ -23,13 +23,13 @@ class CustomDefaultButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.symmetric(horizontal: padding ?? 20),
-          shadowColor: AppColors.primaryColor,
+          shadowColor: AppColors.textButtonColor,
         ),
         onPressed: onTap,
         child: Text(
-          title ?? 'Default',
+          title!.toUpperCase(),
           style: const TextStyle(
-              color: AppColors.textBlack,
+              color: AppColors.textButtonColor,
               fontFamily: 'RobotoSlab',
               fontSize: 16,
               fontWeight: FontWeight.bold),

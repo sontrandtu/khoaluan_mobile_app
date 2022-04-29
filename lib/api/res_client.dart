@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:khoaluan_mobile_app/model/user_model.dart';
+import 'package:khoaluan_mobile_app/api/response_model/login_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../app_config.dart';
@@ -12,7 +12,8 @@ abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
   @POST('/auth/login')
-  Future<HttpResponse<UserModel>> login({@Body() UserModel? userModel});
+  Future<HttpResponse<LoginResponse>> login({@Body() LoginResponse? loginResponse
+  });
 
 // @GET('/widgets/{slug}')
 // Future<HttpResponse<WidgetModel>> getWidgetsBySlug({

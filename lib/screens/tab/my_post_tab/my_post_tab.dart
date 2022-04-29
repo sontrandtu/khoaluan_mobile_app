@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class MyPostTab extends StatefulWidget {
+  const MyPostTab({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<MyPostTab> createState() => _MyPostTabState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MyPostTabState extends State<MyPostTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

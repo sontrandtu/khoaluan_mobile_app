@@ -29,9 +29,10 @@ class HeroTitle extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Align(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.center,
           child: Text(
             content ?? '',
+            textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,

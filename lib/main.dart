@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:khoaluan_mobile_app/app_config.dart';
+import 'package:khoaluan_mobile_app/base/app_provider.dart';
+import 'package:khoaluan_mobile_app/main/main_layout.dart';
 import 'package:khoaluan_mobile_app/page_routes.dart';
 import 'package:khoaluan_mobile_app/repository/user_repository.dart';
 import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_page.dart';
@@ -19,6 +21,7 @@ void main() {
   runApp(MultiProvider(
     providers: [
       Provider(create: (_) => UserRepository()),
+      ChangeNotifierProvider(create: (_) => AppProvider())
     ],
     child: const MyApp(),
   ));
@@ -80,6 +83,12 @@ class MyApp extends StatelessWidget {
 
 _pageMap() {
   return <String, WidgetBuilder>{
+    PageRoutes.rootApp: (BuildContext context) {
+      return ChangeNotifierProvider(
+        create: (_) => LoginViewModel(userRepo: context.watch()),
+        child: const MainLayout(),
+      );
+    },
     PageRoutes.loginPage: (BuildContext context) {
       return ChangeNotifierProvider(
         create: (_) => LoginViewModel(userRepo: context.watch()),
@@ -90,12 +99,6 @@ _pageMap() {
       return ChangeNotifierProvider(
         create: (_) => RegisterViewModel(userRepo: context.watch()),
         child: const RegisterPage(),
-      );
-    },
-    PageRoutes.rootApp: (BuildContext context) {
-      return ChangeNotifierProvider(
-        create: (_) => LoginViewModel(userRepo: context.watch()),
-        child: const RootApp(),
       );
     },
   };

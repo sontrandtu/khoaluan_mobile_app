@@ -8,12 +8,26 @@ part of 'user_model.dart';
 
 extension UserModelCopyWith on UserModel {
   UserModel copyWith({
+    String? address,
     String? email,
-    String? password,
+    String? id,
+    String? image,
+    bool? isLock,
+    double? money,
+    String? name,
+    String? phoneNumber,
+    String? userName,
   }) {
     return UserModel(
+      address: address ?? this.address,
       email: email ?? this.email,
-      password: password ?? this.password,
+      id: id ?? this.id,
+      image: image ?? this.image,
+      isLock: isLock ?? this.isLock,
+      money: money ?? this.money,
+      name: name ?? this.name,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      userName: userName ?? this.userName,
     );
   }
 }
@@ -25,7 +39,14 @@ extension UserModelCopyWith on UserModel {
 UserModel _$UserModelFromJson(Map json) {
   return UserModel(
     email: json['email'] as String?,
-    password: json['password'] as String?,
+    id: json['id'] as String?,
+    userName: json['userName'] as String?,
+    name: json['name'] as String?,
+    address: json['address'] as String?,
+    phoneNumber: json['phoneNumber'] as String?,
+    image: json['image'] as String?,
+    isLock: json['isLock'] as bool?,
+    money: (json['money'] as num?)?.toDouble(),
   );
 }
 
@@ -38,7 +59,14 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) {
     }
   }
 
+  writeNotNull('id', instance.id);
+  writeNotNull('userName', instance.userName);
+  writeNotNull('name', instance.name);
+  writeNotNull('address', instance.address);
   writeNotNull('email', instance.email);
-  writeNotNull('password', instance.password);
+  writeNotNull('phoneNumber', instance.phoneNumber);
+  writeNotNull('image', instance.image);
+  writeNotNull('isLock', instance.isLock);
+  writeNotNull('money', instance.money);
   return val;
 }

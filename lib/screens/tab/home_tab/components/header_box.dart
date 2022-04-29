@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:khoaluan_mobile_app/utils/extensions/context_extension.dart';
 import 'package:khoaluan_mobile_app/utils/extensions/text_styles_extension.dart';
 
-import '../../../page_routes.dart';
-import '../../../theme/color.dart';
+import '../../../../theme/color.dart';
+
 
 class HeaderBox extends StatelessWidget {
   final String title;
@@ -13,10 +13,10 @@ class HeaderBox extends StatelessWidget {
   final int arguments;
   const HeaderBox(
       {Key? key,
-      required this.title,
-      this.viewAllTitle = '',
-      this.arguments = 0,
-      this.onTap})
+        required this.title,
+        this.viewAllTitle = '',
+        this.arguments = 0,
+        this.onTap})
       : super(key: key);
 
   @override
@@ -31,7 +31,7 @@ class HeaderBox extends StatelessWidget {
                 .textStyle(color: AppColors.textBlack)
                 .size16
                 .w700
-                .fontRobotoSlab,
+                .fontQuicksand,
             textAlign: TextAlign.center,
           ),
           const Spacer(),
@@ -42,7 +42,7 @@ class HeaderBox extends StatelessWidget {
                   .textStyle(color: AppColors.textBlack)
                   .w400
                   .size12
-                  .fontRobotoSlab,
+                  .fontQuicksand,
               textAlign: TextAlign.center,
             ),
             onTap: onTap,

@@ -16,12 +16,13 @@ class DioHelper {
         sendTimeout: 30000,
       ));
       _dio?.interceptors.add(InterceptorsWrapper(onRequest: (
-        RequestOptions options,
-        handler,
-      ) {
-        //options.headers['token'] = PreferenceManager.getValue<String>(PreferenceManager.KEY_ACCESS_TOKEN);
-       // options.headers['id'] = PreferenceManager.getValue<String>(PreferenceManager.KEY_USER_ID);
+          RequestOptions options,
+          handler,
+          ) {
+        // options.headers['token'] = PreferenceManager.getValue<String>(PreferenceManager.KEY_ACCESS_TOKEN);
+        //options.headers['id'] = PreferenceManager.getValue<String>(PreferenceManager.KEY_USER_ID);
         options.headers['Accept'] = 'application/json';
+        //options.headers["Authorization"] = PreferenceManager.getValue<String>(PreferenceManager.KEY_ACCESS_TOKEN);
         return handler.next(options); //co
       }, onResponse: (response, handler) {
         return handler.next(response);

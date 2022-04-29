@@ -76,7 +76,7 @@ extension TextStyleExtension on TextStyle {
 
   TextStyle get fontRoboto => copyWith(fontFamily: AppStyles.Roboto);
 
-  TextStyle get fontRobotoSlab => copyWith(fontFamily: AppStyles.RobotoSlab);
+  TextStyle get fontQuicksand => copyWith(fontFamily: AppStyles.quicksand);
 
   TextStyle scale(double v) => copyWith(fontSize: fontSize! * v);
 

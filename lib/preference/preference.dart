@@ -78,5 +78,8 @@ class PreferenceManager {
   static const String KEY_FCM_TOKEN = 'fcm_token';
   static const String KEY_LINK_MESSAGE = 'link_message';
   static const String KEY_LINK_ZALO = 'link_zalo';
+  static const String IS_RELOAD_HOME_TOPIC = 'is_reload_home';
+  static const String IS_RELOAD_USER_INFO = 'is_reload_user_info';
+  static const String IS_RELOAD_FAVORITE = 'is_reload_favorite';
 
 }

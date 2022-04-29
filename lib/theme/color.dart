@@ -5,18 +5,18 @@ class AppColors {
 
   static const Color bgColor = Color(0xfff7f7f7);
   static MaterialColor primaryColor = const MaterialColor(
-    0xFFD7A444,
+    0xFF1976D2,
     <int, Color>{
-      50: Color(0xFFD7A444),
-      100: Color(0xFFD7A444),
-      200: Color(0xFFD7A444),
-      300: Color(0xFFD7A444),
-      400: Color(0xFFD7A444),
-      500: Color(0xFFD7A444),
-      600: Color(0xFFD7A444),
-      700: Color(0xFFD7A444),
-      800: Color(0xFFD7A444),
-      900: Color(0xFFD7A444),
+      50: Color(0xFF1976D2),
+      100: Color(0xFF1976D2),
+      200: Color(0xFF1976D2),
+      300: Color(0xFF1976D2),
+      400: Color(0xFF1976D2),
+      500: Color(0xFF1976D2),
+      600: Color(0xFF1976D2),
+      700: Color(0xFF1976D2),
+      800: Color(0xFF1976D2),
+      900: Color(0xFF1976D2),
     },
   );
   static const MaterialColor secondaryColor = MaterialColor(
@@ -35,6 +35,8 @@ class AppColors {
     },
   );
 
+
+
   static MaterialColor alertColor = const MaterialColor(
     0xff899F8F,
     <int, Color>{
@@ -50,6 +52,7 @@ class AppColors {
       900: Color(0xFF541212),
     },
   );
+  static const Color textButtonColor = Color(0xFFFFFFFF);
   static const Color accentColor = Color(0xFF2E9E4C);
   static const Color textPrimaryColor = Color(0xFFD7A444);
   static const Color textSecondaryColor = Color(0xFF3B2313);
