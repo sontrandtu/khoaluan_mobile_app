@@ -96,6 +96,11 @@ dev_dependencies:
   rename: ^2.0.1
   # You just need to type "flutter pub run build_runner build --delete-conflicting-outputs" in Terminal, then press Enter :)))
 
+flutter_native_splash:
+    color: "#FFFFFF"
+    image: "assets/images/main_logo.png"
+
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
