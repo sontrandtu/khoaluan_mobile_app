@@ -71,6 +71,8 @@ dependencies:
   badges: ^2.0.2
   image_stack: ^2.1.1
   status_change: ^2.0.0
+  google_maps_flutter: ^2.1.4
+  geolocator: ^8.2.1
 
 
 

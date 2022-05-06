@@ -14,8 +14,10 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 
 import 'preference/preference.dart';
+import 'screens/list_post_page/list_post_page.dart';
 import 'screens/login_and_register/login/login_page.dart';
 import 'screens/login_and_register/login/login_view_model.dart';
+import 'screens/map_page/map_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -86,8 +88,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       routes: _pageMap(),
       initialRoute:
-      // PageRoutes.rootApp
-      isLogged ? PageRoutes.rootApp : PageRoutes.loginPage,
+      PageRoutes.rootApp
+      // isLogged ? PageRoutes.rootApp : PageRoutes.loginPage,
     );
   }
 }
@@ -110,6 +112,18 @@ _pageMap() {
       return ChangeNotifierProvider(
         create: (_) => RegisterViewModel(userRepo: context.watch()),
         child: const RegisterPage(),
+      );
+    },
+    PageRoutes.listPostPage: (BuildContext context) {
+      return ChangeNotifierProvider(
+        create: (_) => LoginViewModel(userRepo: context.watch()),
+        child: const ListPostPage(),
+      );
+    },
+    PageRoutes.mapPage: (BuildContext context) {
+      return ChangeNotifierProvider(
+        create: (_) => LoginViewModel(userRepo: context.watch()),
+        child: const MapPage(),
       );
     },
   };

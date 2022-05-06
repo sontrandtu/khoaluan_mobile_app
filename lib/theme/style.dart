@@ -24,7 +24,7 @@ class AppStyles {
       bodyText1: TextStyle(
           fontFamily: quicksand, fontSize: 14, color: AppColors.textDark),
       bodyText2: TextStyle(
-          fontFamily: quicksand, fontSize: 14, color: AppColors.textDark),
+          fontFamily: quicksand, fontSize: 14, color: AppColors.textWhite),
       subtitle1: TextStyle(
           fontFamily: quicksand, fontSize: 14, color: AppColors.textDark),
       subtitle2: TextStyle(

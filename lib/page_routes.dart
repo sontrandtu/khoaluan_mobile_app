@@ -11,6 +11,12 @@ class PageRoutes {
   static const roommatesTab = "root/roommates";
   static const accountTab = "root/account";
   static const myPostTab = "root/my_post";
+
+//-----------------------------------------
+
+  static const listPostPage = "/list_post_page";
+  static const mapPage = "/map_page";
+
 // static const main = "/main";
 // static const signUp = "/sign_up_page";
 // static const signInNew = "/sign_in_new_page";
