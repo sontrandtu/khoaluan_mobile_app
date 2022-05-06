@@ -70,6 +70,8 @@ dependencies:
   smooth_star_rating_null_safety: ^1.0.4+2
   badges: ^2.0.2
   image_stack: ^2.1.1
+  status_change: ^2.0.0
+
 
 
 dev_dependencies:

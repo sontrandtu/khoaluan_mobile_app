@@ -6,34 +6,48 @@ part 'user_model.g.dart';
 @CopyWith(generateCopyWithNull: false)
 @JsonSerializable(anyMap: true, includeIfNull: false)
 class UserModel {
-  final String? id;
-  final String? userName;
-  final String? name;
-  final String? address;
-  final String? email;
-  final String? phoneNumber;
-  final String? image;
-  final bool? isLock;
-  final double? money;
+  String? id;
+  String? userName;
+  String? password;
+  String? token;
+  String? name;
+  String? address;
+  String? email;
+  String? phoneNumber;
+  String? image;
+  bool? isLock;
+  double? money;
+
+  UserModel(
+      {this.email,
+      this.id,
+      this.userName,
+      this.password,
+      this.token,
+      this.name,
+      this.address,
+      this.phoneNumber,
+      this.image,
+      this.isLock,
+      this.money});
 
 
+  String get imageUrl => image?.replaceAll("localhost", "10.0.2.2") ?? "";
 
-  UserModel({this.email, this.id, this.userName, this.name, this.address, this.phoneNumber, this.image, this.isLock, this.money});
-
-  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   static UserModel demo = UserModel(
-    id: "1234",
-    userName: "sontran",
-    name: "Sơn Trần",
-    address: "Nghệ An",
-    email: "sontran2k37@gmail.com",
-    phoneNumber: "0367759794",
-    image: "https://drive.google.com/file/d/1nrFr7B5pfqvK-oGJxWiAmK1-1MmYkplQ/view?usp=sharing",
-    isLock: false,
-    money: 20000
-  );
-
+      id: "1234",
+      userName: "sontran",
+      name: "Sơn Trần",
+      address: "Nghệ An",
+      email: "sontran2k37@gmail.com",
+      phoneNumber: "0367759794",
+      image:
+          "http://10.0.2.2:3000/api/images/1651069355697.jpg",
+      isLock: false,
+      money: 20000);
 }

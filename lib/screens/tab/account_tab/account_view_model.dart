@@ -9,5 +9,4 @@ class AccountViewModel extends BaseViewModel{
 
 
   AccountViewModel({required this.repo}) : super(repo);
-
 }

@@ -31,7 +31,8 @@ class ServerError implements Exception {
         if(error.response!.statusCode == 401){
           _errorMessage =  "Token hết hạn";
         }else {
-          _errorMessage =  "Received invalid status code: ${error.response?.statusCode}";
+          _errorMessage = error.message;
+          // _errorMessage =  "Received invalid status code: ${error.response?.statusCode}";
         }
         break;
       case DioErrorType.cancel:

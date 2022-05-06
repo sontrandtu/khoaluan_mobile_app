@@ -10,7 +10,6 @@ class Repository {
     apiClient = RestClient(DioHelper.dioObject!);
   }
 
-  String? get accessToken => PreferenceManager.getValue<String>(PreferenceManager.KEY_ACCESS_TOKEN);
+  String? get accessToken => PreferenceManager.getValue<String>(PreferenceManager.KEY_TOKEN);
 
-  String? get userId => PreferenceManager.getValue<String>(PreferenceManager.KEY_USER_ID);
 }

@@ -43,7 +43,7 @@ extension ContextExtension on BuildContext {
         borderRadius: BorderRadius.circular(25.0),
         color: bg,
       ),
-      child: Text(message ?? ''),
+      child: Text(message ?? '',textAlign: TextAlign.center, style: const TextStyle(color: Colors.white),),
     );
     fToast.removeCustomToast();
     fToast.showToast(

@@ -15,7 +15,9 @@ extension UserModelCopyWith on UserModel {
     bool? isLock,
     double? money,
     String? name,
+    String? password,
     String? phoneNumber,
+    String? token,
     String? userName,
   }) {
     return UserModel(
@@ -26,7 +28,9 @@ extension UserModelCopyWith on UserModel {
       isLock: isLock ?? this.isLock,
       money: money ?? this.money,
       name: name ?? this.name,
+      password: password ?? this.password,
       phoneNumber: phoneNumber ?? this.phoneNumber,
+      token: token ?? this.token,
       userName: userName ?? this.userName,
     );
   }
@@ -41,6 +45,8 @@ UserModel _$UserModelFromJson(Map json) {
     email: json['email'] as String?,
     id: json['id'] as String?,
     userName: json['userName'] as String?,
+    password: json['password'] as String?,
+    token: json['token'] as String?,
     name: json['name'] as String?,
     address: json['address'] as String?,
     phoneNumber: json['phoneNumber'] as String?,
@@ -61,6 +67,8 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) {
 
   writeNotNull('id', instance.id);
   writeNotNull('userName', instance.userName);
+  writeNotNull('password', instance.password);
+  writeNotNull('token', instance.token);
   writeNotNull('name', instance.name);
   writeNotNull('address', instance.address);
   writeNotNull('email', instance.email);

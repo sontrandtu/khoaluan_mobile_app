@@ -239,13 +239,13 @@ class _TabsPageState extends State<MainLayout> with WidgetsBindingObserver {
                   }),
             ],
           ),
-          floatingActionButton: Container(
+          floatingActionButton: SizedBox(
             width: 52,
             height: 52,
             child: Center(
               child: FloatingActionButton(
                 backgroundColor: AppColors.primaryColor,
-                child: const Icon(Icons.add_rounded, size: 24),
+                child: const Icon(Icons.search, size: 32),
                 onPressed: () {
                   context.showMessage("Đăng bài", type: MessageType.success);
                   // Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.treatment, arguments: []);
@@ -280,7 +280,7 @@ class _TabsPageState extends State<MainLayout> with WidgetsBindingObserver {
                   Row(
                     children: [
                       navigationItem(tabType: TabType.myPost, icon: Icons.list_alt_outlined),
-                      navigationItem(tabType: TabType.account, icon: Icons.account_circle_outlined),
+                      navigationItem(tabType: TabType.account, icon: Icons.person_outlined),
                     ],
                   ),
                 ],

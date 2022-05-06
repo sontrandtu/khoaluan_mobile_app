@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:khoaluan_mobile_app/api/server_error.dart';
@@ -31,12 +33,12 @@ extension FutureExtensions<T> on Future<HttpResponse<T>> {
       final httpResponse = await this;
       return Future.value(ApiResponse<T>(data: httpResponse.data, code: httpResponse.response.statusCode));
     } catch (error) {
-      print('FutureExtensions ===================================${error.toString()}');
+      log('FutureExtensions ===================================${error.toString()}');
       if (error is DioError) {
         if(error.response == null){
           return Future.value(ApiResponse(code: error.response?.statusCode ?? 0, error: error));
         }else{
-          final String? message = error.response?.data['message'];
+          final String? message = error.response?.data['messages'];
           return Future.value(ApiResponse(code: error.response?.statusCode ?? 0, error: error,message: message));
         }
 

@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../preference/preference.dart';
 
 class DioHelper {
   static Dio? _dio;
-  static int? groupId;
 
   static Dio? get dioObject {
     if (_dio == null) {
@@ -19,16 +19,14 @@ class DioHelper {
           RequestOptions options,
           handler,
           ) {
-        // options.headers['token'] = PreferenceManager.getValue<String>(PreferenceManager.KEY_ACCESS_TOKEN);
-        //options.headers['id'] = PreferenceManager.getValue<String>(PreferenceManager.KEY_USER_ID);
-        options.headers['Accept'] = 'application/json';
-        //options.headers["Authorization"] = PreferenceManager.getValue<String>(PreferenceManager.KEY_ACCESS_TOKEN);
-        return handler.next(options); //co
+        options.headers['Content-Type'] = 'application/json';
+        options.headers["Authorization"] = PreferenceManager.getValue<String>(PreferenceManager.KEY_TOKEN);
+        return handler.next(options);
       }, onResponse: (response, handler) {
         return handler.next(response);
       }, onError: (error, handler) {
         if (error.response?.statusCode == 403) {
-          //showMessage('Phiên đăng nhập hết hạn, vui lòng đăng nhập lại');
+          // showMessage('Phiên đăng nhập hết hạn, vui lòng đăng nhập lại');
           PreferenceManager.logOut();
           //mainKey.currentState?.pushNamedAndRemoveUntil(PageRoutes.enterPhoneNumber, (route) => false);
         }

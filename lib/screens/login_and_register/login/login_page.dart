@@ -83,20 +83,15 @@ class _LoginPageState extends State<LoginPage> {
                         CustomDefaultButton(
                           onTap: () {
                             if (loginKey.currentState!.validate()) {
-                              // viewModel.login(
-                              //   successCallback: (message) {
-                              //     print(message);
-                              //   },
-                              //   errorCallback: (error) {
-                              //     print(error);
-                              //   },
-                              // );
-                              Navigator.of(context).pushNamed(PageRoutes.rootApp);
-                              context.showMessage(
-                                  usernameController.text +
-                                      "\n" +
-                                      passwordController.text,
-                                  type: MessageType.success);
+                              viewModel.login(
+                                successCallback: (message) {
+                                  context.showMessage(message, type: MessageType.success);
+                                  Navigator.of(context).pushNamed(PageRoutes.rootApp);
+                                },
+                                errorCallback: (error) {
+                                  context.showMessage(error, type: MessageType.error);
+                                },
+                              );
                             }
                           },
                           height: 50,

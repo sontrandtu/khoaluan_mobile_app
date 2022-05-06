@@ -7,28 +7,37 @@ import 'package:khoaluan_mobile_app/page_routes.dart';
 import 'package:khoaluan_mobile_app/repository/user_repository.dart';
 import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_page.dart';
 import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_view_model.dart';
-import 'package:khoaluan_mobile_app/screens/root_app.dart';
 import 'package:khoaluan_mobile_app/theme/color.dart';
 import 'package:khoaluan_mobile_app/theme/style.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 
+import 'preference/preference.dart';
 import 'screens/login_and_register/login/login_page.dart';
 import 'screens/login_and_register/login/login_view_model.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  await PreferenceManager.init();
+
+  String? token = PreferenceManager.getValue<String>(PreferenceManager.KEY_TOKEN);
+
   runApp(MultiProvider(
     providers: [
       Provider(create: (_) => UserRepository()),
       ChangeNotifierProvider(create: (_) => AppProvider())
     ],
-    child: const MyApp(),
+    child: MyApp(
+      isLogged: (token != null && token.isNotEmpty) ? true : false,
+    ),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool isLogged;
+  const MyApp({Key? key, this.isLogged = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +85,9 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.light,
       routes: _pageMap(),
-      initialRoute: PageRoutes.loginPage,
+      initialRoute:
+      // PageRoutes.rootApp
+      isLogged ? PageRoutes.rootApp : PageRoutes.loginPage,
     );
   }
 }

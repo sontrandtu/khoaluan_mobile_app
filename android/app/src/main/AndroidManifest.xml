@@ -2,7 +2,7 @@
     package="com.example.khoaluan_mobile_app">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="khoaluan_mobile_app"
+        android:label="Fast Room"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

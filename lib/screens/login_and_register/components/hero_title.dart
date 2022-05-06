@@ -18,7 +18,7 @@ class HeroTitle extends StatelessWidget {
         (image == null) ? const SizedBox() : Image.asset(image!),
         const SizedBox(height: 20),
         Align(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.center,
           child: Text(
             title ?? '',
             style: const TextStyle(
