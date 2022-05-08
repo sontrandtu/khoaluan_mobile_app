@@ -11,7 +11,7 @@ ListResponse<T> _$ListResponseFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) {
   return ListResponse<T>(
-    items: _$nullableGenericFromJson(json['items'], fromJsonT),
+    data: _$nullableGenericFromJson(json['data'], fromJsonT),
   );
 }
 
@@ -20,7 +20,7 @@ Map<String, dynamic> _$ListResponseToJson<T>(
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
-      'items': _$nullableGenericToJson(instance.items, toJsonT),
+      'data': _$nullableGenericToJson(instance.data, toJsonT),
     };
 
 T? _$nullableGenericFromJson<T>(

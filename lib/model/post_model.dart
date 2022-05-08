@@ -1,44 +1,56 @@
+// To parse this JSON data, do
+//
+//     final postModel = postModelFromJson(jsonString);
+
+import 'dart:convert';
+
+PostModel postModelFromJson(String str) => PostModel.fromJson(json.decode(str));
+
+String postModelToJson(PostModel data) => json.encode(data.toJson());
+
 class PostModel {
+
   String? address;
   String? id;
   String? infoConnect;
   int? price;
   String? rootLocation;
   String? title;
-  String? createdAt;
+  DateTime? createdAt;
   String? imagePost;
 
-  PostModel(
-      {this.address,
-        this.id,
-        this.infoConnect,
-        this.price,
-        this.rootLocation,
-        this.title,
-        this.createdAt,
-        this.imagePost});
+  PostModel({
+    this.address,
+    this.id,
+    this.infoConnect,
+    this.price,
+    this.rootLocation,
+    this.title,
+    this.createdAt,
+    this.imagePost,
+  });
 
-  PostModel.fromJson(Map<String, dynamic> json) {
-    address = json['address'];
-    id = json['id'];
-    infoConnect = json['infoConnect'];
-    price = json['price'];
-    rootLocation = json['rootLocation'];
-    title = json['title'];
-    createdAt = json['createdAt'];
-    imagePost = json['imagePost'];
-  }
+  String get imageUrl => imagePost?.replaceAll("localhost", "10.0.2.2") ?? "";
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['address'] = address;
-    data['id'] = id;
-    data['infoConnect'] = infoConnect;
-    data['price'] = price;
-    data['rootLocation'] = rootLocation;
-    data['title'] = title;
-    data['createdAt'] = createdAt;
-    data['imagePost'] = imagePost;
-    return data;
-  }
+  factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
+    address: json["address"],
+    id: json["id"],
+    infoConnect: json["infoConnect"],
+    price: json["price"],
+    rootLocation: json["rootLocation"],
+    title: json["title"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    imagePost: json["imagePost"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "address": address,
+    "id": id,
+    "infoConnect": infoConnect,
+    "price": price,
+    "rootLocation": rootLocation,
+    "title": title,
+    "createdAt": createdAt?.toIso8601String(),
+    "imagePost": imagePost,
+  };
 }

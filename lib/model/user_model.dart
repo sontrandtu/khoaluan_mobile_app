@@ -1,53 +1,53 @@
-import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:json_annotation/json_annotation.dart';
-
-part 'user_model.g.dart';
-
-@CopyWith(generateCopyWithNull: false)
-@JsonSerializable(anyMap: true, includeIfNull: false)
 class UserModel {
+  UserModel({
+    this.id,
+    this.name,
+    this.email,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isLock,
+    this.money,
+    this.userName,
+    this.password,
+  });
+
   String? id;
+  String? name;
+  String? email;
+  String? address;
+  String? phoneNumber;
+  String? imageUrl;
+  bool? isLock;
+  int? money;
   String? userName;
   String? password;
-  String? token;
-  String? name;
-  String? address;
-  String? email;
-  String? phoneNumber;
-  String? image;
-  bool? isLock;
-  double? money;
 
-  UserModel(
-      {this.email,
-      this.id,
-      this.userName,
-      this.password,
-      this.token,
-      this.name,
-      this.address,
-      this.phoneNumber,
-      this.image,
-      this.isLock,
-      this.money});
+    String get avatarUrl => imageUrl?.replaceAll("localhost", "10.0.2.2") ?? "";
 
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+    id: json["id"],
+    name: json["name"],
+    email: json["email"],
+    address: json["address"],
+    phoneNumber: json["phoneNumber"],
+    imageUrl: json["imageUrl"],
+    isLock: json["isLock"],
+    money: json["money"],
+    userName: json["userName"],
+    password: json["password"],
+  );
 
-  String get imageUrl => image?.replaceAll("localhost", "10.0.2.2") ?? "";
-
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
-
-  static UserModel demo = UserModel(
-      id: "1234",
-      userName: "sontran",
-      name: "Sơn Trần",
-      address: "Nghệ An",
-      email: "sontran2k37@gmail.com",
-      phoneNumber: "0367759794",
-      image:
-          "http://10.0.2.2:3000/api/images/1651069355697.jpg",
-      isLock: false,
-      money: 20000);
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "email": email,
+    "address": address,
+    "phoneNumber": phoneNumber,
+    "imageUrl": imageUrl,
+    "isLock": isLock,
+    "money": money,
+    "userName": userName,
+    "password": password,
+  };
 }

@@ -36,7 +36,7 @@ abstract class LoadMoreMixin<T> {
     if (needShowLoading) notifyLoading = true;
     final response = await getData();
     if (response.isOk) {
-      final data = response.data?.items as List<T>;
+      final data = response.data?.data as List<T>;
       if (data.isEmpty) {
         pagingRequest.reachMaxPage = true;
         if (pagingRequest.page == 1) {

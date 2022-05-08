@@ -15,6 +15,7 @@ class PageRoutes {
 //-----------------------------------------
 
   static const listPostPage = "/list_post_page";
+  static const searchPostPage = "/search_post_page";
   static const mapPage = "/map_page";
 
 // static const main = "/main";

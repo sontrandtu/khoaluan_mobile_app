@@ -4,9 +4,14 @@ import 'package:khoaluan_mobile_app/app_config.dart';
 import 'package:khoaluan_mobile_app/base/app_provider.dart';
 import 'package:khoaluan_mobile_app/main/main_layout.dart';
 import 'package:khoaluan_mobile_app/page_routes.dart';
+import 'package:khoaluan_mobile_app/repository/category_repository.dart';
+import 'package:khoaluan_mobile_app/repository/post_repository.dart';
 import 'package:khoaluan_mobile_app/repository/user_repository.dart';
+import 'package:khoaluan_mobile_app/screens/list_post_page/list_post_view_model.dart';
 import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_page.dart';
 import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_view_model.dart';
+import 'package:khoaluan_mobile_app/screens/search_post/dart/search_post_page.dart';
+import 'package:khoaluan_mobile_app/screens/search_post/dart/search_post_view_model.dart';
 import 'package:khoaluan_mobile_app/theme/color.dart';
 import 'package:khoaluan_mobile_app/theme/style.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +24,8 @@ import 'screens/login_and_register/login/login_page.dart';
 import 'screens/login_and_register/login/login_view_model.dart';
 import 'screens/map_page/map_page.dart';
 
+final GlobalKey<NavigatorState> mainKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -29,6 +36,8 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       Provider(create: (_) => UserRepository()),
+      Provider(create: (_) => CategoryRepository()),
+      Provider(create: (_) => PostRepository()),
       ChangeNotifierProvider(create: (_) => AppProvider())
     ],
     child: MyApp(
@@ -116,8 +125,14 @@ _pageMap() {
     },
     PageRoutes.listPostPage: (BuildContext context) {
       return ChangeNotifierProvider(
-        create: (_) => LoginViewModel(userRepo: context.watch()),
+        create: (_) => ListPostViewModel(postRepo: context.watch()),
         child: const ListPostPage(),
+      );
+    },
+    PageRoutes.searchPostPage: (BuildContext context) {
+      return ChangeNotifierProvider(
+        create: (_) => SearchPostViewModel(categoryRepo: context.watch()),
+        child: const SearchPostPage(),
       );
     },
     PageRoutes.mapPage: (BuildContext context) {

@@ -22,9 +22,9 @@ class AppStyles {
 
   static const textTheme = TextTheme(
       bodyText1: TextStyle(
-          fontFamily: quicksand, fontSize: 14, color: AppColors.textDark),
-      bodyText2: TextStyle(
           fontFamily: quicksand, fontSize: 14, color: AppColors.textWhite),
+      bodyText2: TextStyle(
+          fontFamily: quicksand, fontSize: 14, color: AppColors.textBlack),
       subtitle1: TextStyle(
           fontFamily: quicksand, fontSize: 14, color: AppColors.textDark),
       subtitle2: TextStyle(

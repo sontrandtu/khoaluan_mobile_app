@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:khoaluan_mobile_app/repository/category_repository.dart';
+import 'package:khoaluan_mobile_app/repository/post_repository.dart';
+import 'package:khoaluan_mobile_app/repository/user_repository.dart';
 import 'package:khoaluan_mobile_app/screens/tab/home_tab/home_tab.dart';
 import 'package:khoaluan_mobile_app/screens/tab/home_tab/home_view_model.dart';
 import 'package:khoaluan_mobile_app/screens/tab/my_post_tab/my_post_tab.dart';
@@ -153,138 +156,140 @@ class _TabsPageState extends State<MainLayout> with WidgetsBindingObserver {
         }
         return false;
       },
-      child: SafeArea(
-        child: Scaffold(
-          resizeToAvoidBottomInset: true,
-          // extendBodyBehindAppBar: true,
-          extendBody: true,
-          body: PageView(
-            controller: _pageController,
-            physics: const NeverScrollableScrollPhysics(),
-            children: <Widget>[
-              Navigator(
-                  key: homeNav,
-                  initialRoute: PageRoutes.homeTab,
-                  onGenerateRoute: (RouteSettings settings) {
-                    WidgetBuilder builder;
-                    switch (settings.name) {
-                      case PageRoutes.homeTab:
-                        builder = (BuildContext _) =>
-                            ChangeNotifierProvider(
-                                create: (_) =>
-                                    HomeViewModel(repo: context.read()),
-                                child: HomeTab());
-                        break;
-                      default:
-                        throw Exception(
-                            'HomeNav Invalid Route: ${settings.name}');
-                    }
-                    return MaterialPageRoute(
-                        builder: builder, settings: settings);
-                  }),
-              Navigator(
-                  key: roommatesNav,
-                  initialRoute: PageRoutes.roommatesTab,
-                  onGenerateRoute: (RouteSettings settings) {
-                    WidgetBuilder builder;
-                    switch (settings.name) {
-                      case PageRoutes.roommatesTab:
-                        builder = (BuildContext _) => ChangeNotifierProvider(
-                            create: (_) => RoommatesViewModel(repo: context.read()),
-                            child: RoommatesTab()
-                        );
-                        break;
-                      default:
-                        throw Exception('BookingNav Invalid Route: ${settings.name}');
-                    }
-                    return MaterialPageRoute(builder: builder, settings: settings);
-                  }),
-              Navigator(
-                key: myPostNav,
-                initialRoute: PageRoutes.myPostTab,
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        // extendBodyBehindAppBar: true,
+        extendBody: true,
+        body: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: <Widget>[
+            Navigator(
+                key: homeNav,
+                initialRoute: PageRoutes.homeTab,
                 onGenerateRoute: (RouteSettings settings) {
                   WidgetBuilder builder;
                   switch (settings.name) {
-                    case PageRoutes.myPostTab:
+                    case PageRoutes.homeTab:
+                      builder = (BuildContext _) =>
+                          ChangeNotifierProvider(
+                              create: (_) =>
+                                  HomeViewModel(
+                                    userRepository: context.read<UserRepository>(),
+                                      repo: context.read<UserRepository>(),
+                                      categoryRepo: context.watch<CategoryRepository>(),
+                                    postRepo: context.watch<PostRepository>(),
+                                  ),
+                              child: const HomeTab());
+                      break;
+                    default:
+                      throw Exception(
+                          'HomeNav Invalid Route: ${settings.name}');
+                  }
+                  return MaterialPageRoute(
+                      builder: builder, settings: settings);
+                }),
+            Navigator(
+                key: roommatesNav,
+                initialRoute: PageRoutes.roommatesTab,
+                onGenerateRoute: (RouteSettings settings) {
+                  WidgetBuilder builder;
+                  switch (settings.name) {
+                    case PageRoutes.roommatesTab:
                       builder = (BuildContext _) => ChangeNotifierProvider(
-                          create: (_) => MyPostViewModel(repo: context.read()),
-                          child: const MyPostTab()
+                          create: (_) => RoommatesViewModel(repo: context.read()),
+                          child: RoommatesTab()
                       );
                       break;
-                    default:throw Exception('VideoNav Invalid Route: ${settings.name}');
+                    default:
+                      throw Exception('BookingNav Invalid Route: ${settings.name}');
                   }
                   return MaterialPageRoute(builder: builder, settings: settings);
-                },
-              ),
-              Navigator(
-                  key: accountNav,
-                  initialRoute: PageRoutes.accountTab,
-                  onGenerateRoute: (RouteSettings settings) {
-                    WidgetBuilder builder;
-                    switch (settings.name) {
-                      case PageRoutes.accountTab:
-                        builder = (BuildContext nestedContext) {
-                          return ChangeNotifierProvider(
-                              create: (_) =>
-                                  AccountViewModel(repo: context.read()),
-                              child: const AccountTab());
-                        };
-                        break;
-                      default:
-                        throw Exception(
-                            'AccountNav Invalid Route: ${settings.name}');
-                    }
-                    return MaterialPageRoute(
-                        builder: builder, settings: settings);
-                  }),
-            ],
-          ),
-          floatingActionButton: SizedBox(
-            width: 52,
-            height: 52,
-            child: Center(
-              child: FloatingActionButton(
-                backgroundColor: AppColors.primaryColor,
-                child: const Icon(Icons.search, size: 32),
-                onPressed: () {
-                  Navigator.of(context,rootNavigator: true).pushNamed(PageRoutes.listPostPage);
-                  // Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.treatment, arguments: []);
-                },
-                tooltip: "Đặt lịch",
-              ),
+                }),
+            Navigator(
+              key: myPostNav,
+              initialRoute: PageRoutes.myPostTab,
+              onGenerateRoute: (RouteSettings settings) {
+                WidgetBuilder builder;
+                switch (settings.name) {
+                  case PageRoutes.myPostTab:
+                    builder = (BuildContext _) => ChangeNotifierProvider(
+                        create: (_) => MyPostViewModel(repo: context.read()),
+                        child: const MyPostTab()
+                    );
+                    break;
+                  default:throw Exception('VideoNav Invalid Route: ${settings.name}');
+                }
+                return MaterialPageRoute(builder: builder, settings: settings);
+              },
+            ),
+            Navigator(
+                key: accountNav,
+                initialRoute: PageRoutes.accountTab,
+                onGenerateRoute: (RouteSettings settings) {
+                  WidgetBuilder builder;
+                  switch (settings.name) {
+                    case PageRoutes.accountTab:
+                      builder = (BuildContext nestedContext) {
+                        return ChangeNotifierProvider(
+                            create: (_) =>
+                                AccountViewModel(repo: context.read()),
+                            child: const AccountTab());
+                      };
+                      break;
+                    default:
+                      throw Exception(
+                          'AccountNav Invalid Route: ${settings.name}');
+                  }
+                  return MaterialPageRoute(
+                      builder: builder, settings: settings);
+                }),
+          ],
+        ),
+        floatingActionButton: SizedBox(
+          width: 52,
+          height: 52,
+          child: Center(
+            child: FloatingActionButton(
+              backgroundColor: AppColors.primaryColor,
+              child: const Icon(Icons.search, size: 32),
+              onPressed: () {
+                Navigator.of(context,rootNavigator: true).pushNamed(PageRoutes.searchPostPage);
+              },
+              tooltip: "Đặt lịch",
             ),
           ),
-          floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-          floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterDocked,
-          bottomNavigationBar: BottomAppBar(
-            color: AppColors.primaryColor,
-            elevation: 0,
-            shape: const CircularNotchedRectangle(),
-            notchMargin: 4,
-            clipBehavior: Clip.antiAlias,
-            child:
-            SizedBox(
-              height: 56,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      navigationItem(tabType: TabType.home, icon: Icons.home_outlined),
-                      navigationItem(tabType: TabType.roommates, icon: Icons.group_add_outlined),
-                    ],
-                  ),
-                  const SizedBox(),
-                  Row(
-                    children: [
-                      navigationItem(tabType: TabType.myPost, icon: Icons.list_alt_outlined),
-                      navigationItem(tabType: TabType.account, icon: Icons.person_outlined),
-                    ],
-                  ),
-                ],
-              ),
+        ),
+        floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+        floatingActionButtonLocation:
+        FloatingActionButtonLocation.miniCenterDocked,
+        bottomNavigationBar: BottomAppBar(
+          color: AppColors.primaryColor,
+          elevation: 0,
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 4,
+          clipBehavior: Clip.antiAlias,
+          child:
+          SizedBox(
+            height: 56,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    navigationItem(tabType: TabType.home, icon: Icons.home_outlined),
+                    navigationItem(tabType: TabType.roommates, icon: Icons.group_add_outlined),
+                  ],
+                ),
+                const SizedBox(),
+                Row(
+                  children: [
+                    navigationItem(tabType: TabType.myPost, icon: Icons.list_alt_outlined),
+                    navigationItem(tabType: TabType.account, icon: Icons.person_outlined),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

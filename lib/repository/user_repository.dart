@@ -6,6 +6,10 @@ class UserRepository extends Repository {
   Future<ApiResponse<dynamic>> login({UserModel? userModel}) async {
     return await apiClient!.login(userModel: userModel).wrap();
   }
+
+  Future<ApiResponse<UserModel>> getInfo() async {
+    return await apiClient!.getInfo().wrap();
+  }
 }
 
 

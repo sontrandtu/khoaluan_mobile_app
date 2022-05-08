@@ -5,4 +5,6 @@ class Res {
   static const String mainLogo = 'assets/images/main_logo.png';
   static const String avatarPlaceHolder = 'assets/images/image_avatar_place_holder.png';
   static const String placeHolder = 'assets/images/placeholder.png';
+  static const String iconNoResult = 'assets/icons/ic_no_result.svg';
+
 }

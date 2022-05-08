@@ -6,11 +6,13 @@ import '../../../../theme/color.dart';
 class ItemNameAndSeeAll extends StatelessWidget {
   final String? itemName;
   final GestureTapCallback? seeAllTap;
+  final bool canSeeAll;
 
   const ItemNameAndSeeAll({
     Key? key,
     this.itemName,
     this.seeAllTap,
+    this.canSeeAll = true,
   }) : super(key: key);
 
   @override
@@ -26,16 +28,16 @@ class ItemNameAndSeeAll extends StatelessWidget {
                 .textStyle(color: AppColors.textBlack)
                 .copyWith(fontWeight: FontWeight.w700, fontSize: 16),
           ),
-          GestureDetector(
+          canSeeAll ? GestureDetector(
             onTap: seeAllTap,
             child: Text(
               "Xem tất cả",
               style: context.textStyle(color: AppColors.primaryColor).copyWith(
-                fontWeight: FontWeight.w700,
-                fontSize: 12,
-              ),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 12,
+                  ),
             ),
-          ),
+          ) : const SizedBox(),
         ],
       ),
     );

@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:khoaluan_mobile_app/api/response_model/list_response.dart';
 import 'package:khoaluan_mobile_app/api/response_model/login_response.dart';
 import 'package:khoaluan_mobile_app/model/user_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../app_config.dart';
+import '../model/category_model.dart';
+import '../model/post_model.dart';
 part 'res_client.g.dart';
 
 const int pageSize = 20;
@@ -23,10 +26,17 @@ abstract class RestClient {
     @Body() UserModel? userModel,
   });
 
-// @GET('/widgets/{slug}')
-// Future<HttpResponse<WidgetModel>> getWidgetsBySlug({
-//   @Path('slug') String? slug,
-// });
+  @GET('/user/get_info')
+  Future<HttpResponse<UserModel>> getInfo();
+
+
+  @GET('/categories/get_all')
+  Future<HttpResponse<List<CategoryModel>>> getCategories();
+
+  @GET('/post/get_post_by_categories/{categoryId}')
+  Future<HttpResponse<ListResponse<List<PostModel>>>> getListPostByCategory({
+    @Path('categoryId') String? categoryId
+  });
 //
 // @GET('/comments-by-article?article_id={id}')
 // Future<HttpResponse<ListResponse<List<CommentModel>>>> getCommentsByLevel(@Path('id') int? articleId, @Query('level') int level);
