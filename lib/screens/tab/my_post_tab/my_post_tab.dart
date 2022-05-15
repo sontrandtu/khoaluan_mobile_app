@@ -5,6 +5,7 @@ import 'package:khoaluan_mobile_app/utils/extensions/context_extension.dart';
 import 'package:khoaluan_mobile_app/widgets/cover_loading.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:khoaluan_mobile_app/utils/extensions/string_extension.dart';
 
 import '../../../theme/color.dart';
 import '../../../widgets/custom_cached_network_image.dart';
@@ -56,7 +57,7 @@ class _MyPostTabState extends State<MyPostTab> {
                   child: Row(
                     children: [
                       CustomNetworkImage(
-                        url: item?.imagePost ?? '',
+                        url: item?.imagePost?.imageUrl ?? '',
                         width: 100,
                         height: 100,
                       ),
