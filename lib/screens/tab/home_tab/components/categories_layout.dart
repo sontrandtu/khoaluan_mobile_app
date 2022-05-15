@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_mobile_app/page_routes.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../model/category_model.dart';
@@ -19,7 +20,9 @@ class CategoriesLayOut extends StatelessWidget {
         children: [
           ItemNameAndSeeAll(
             itemName: "Danh mục tìm kiếm",
-            seeAllTap: () {},
+            seeAllTap: () {
+              Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.searchPostPage);
+            },
           ),
           categories.isEmpty ? Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
@@ -70,7 +73,7 @@ class CategoriesLayOut extends StatelessWidget {
                   border: Border.all(width: 1, color: Colors.grey.withOpacity(0.2)),
                 ),
                 child: Text(
-                  categories[index].nameCategories ?? '',
+                  categories[index].name ?? '',
                   style: Theme.of(context).textTheme.bodyText2?.copyWith(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

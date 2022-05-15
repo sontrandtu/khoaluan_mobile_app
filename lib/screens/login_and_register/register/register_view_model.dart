@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:khoaluan_mobile_app/base/base_view_model.dart';
 import 'package:khoaluan_mobile_app/model/user_model.dart';
 import 'package:khoaluan_mobile_app/repository/user_repository.dart';
+import 'package:khoaluan_mobile_app/utils/toast_utils.dart';
 
 const int timerOTP = 60;
 
@@ -11,6 +12,7 @@ class RegisterViewModel extends BaseViewModel {
 
   UserModel userModel = UserModel();
   String otp = '';
+  bool isSuccess = false;
   RegisterViewModel({required this.userRepo}) : super(userRepo);
 
   set updateOtp(String value) {
@@ -44,13 +46,17 @@ class RegisterViewModel extends BaseViewModel {
     return start == 0;
   }
 
-  resendOTP() async {
+  getOTP() async {
+    setLoading = true;
     start = timerOTP;
     startTimer();
-    // final response = await repo.login(phoneNumber);
-    // if (response.isOk) {
-    //   otp = response.data!.otp!;
-    // } else {}
+    final response = await userRepo.getOTP(phoneNumber: userModel.phoneNumber);
+    if (response.isOk) {
+      isSuccess = true;
+    } else {
+      isSuccess = false;
+    }
+    setLoading = false;
   }
 
   @override

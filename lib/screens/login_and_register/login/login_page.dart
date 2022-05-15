@@ -50,7 +50,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 30),
                         CustomInputField(
-                          value: "fjskdfjsdfkjdshjf",
                           labelWidget: const Text('Tên đăng nhập'),
                           validator: (String? value) {
                             if (value!.isEmpty) {
@@ -65,7 +64,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 20),
                         CustomInputField(
-                          value: "dnkjfhskajfhaf",
                           labelWidget: const Text('Mật khẩu'),
                           obscureText: true,
                           validator: (String? value) {

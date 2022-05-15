@@ -7,10 +7,12 @@ import 'package:khoaluan_mobile_app/widgets/no_result_page.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../theme/app_bar.dart';
 import 'list_post_view_model.dart';
 
 class ListPostPage extends StatefulWidget {
-  const ListPostPage({Key? key}) : super(key: key);
+  final bool? isSearch ;
+  const ListPostPage({this.isSearch, Key? key}) : super(key: key);
 
   @override
   State<ListPostPage> createState() => _ListPostPageState();
@@ -24,7 +26,7 @@ class _ListPostPageState extends State<ListPostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: const DefaultAppBar(title: "Tìm trọ"),
+      appBar: widget.isSearch ?? false ? const DefaultAppBar(title: "Tìm trọ") : null,
       body: SafeArea(
         child: Consumer<ListPostViewModel>(
           builder: (context, viewModel, child) => SmartRefresher(

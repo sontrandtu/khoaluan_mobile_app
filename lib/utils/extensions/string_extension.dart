@@ -14,6 +14,10 @@ extension StringExtension on String {
     return nonUnicode.contains(nonUnicodeQuery);
   }
 
+  String get imageUrl{
+    return replaceAll("localhost", "10.0.2.2");
+  }
+
   String? get extractTraceId {
     final regex = RegExp(r'[a-z0-9]+\.(?:html)$');
     try {
@@ -126,6 +130,10 @@ extension StringExtension on String {
     }
     return this;
   }
+
+  bool isStorage() => RegExp(r'^\/(storage|data)[^\.]').hasMatch(this);
+
+  bool isAssets() => RegExp(r'^assets\/').hasMatch(this);
 
 
   String _toDecimal(String number, int unit) => (double.parse(number) / unit).toStringAsFixed(2);

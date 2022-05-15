@@ -24,7 +24,7 @@ class ApiResponse<T> {
   }
 
   bool get isOk => code == 200;
-  bool get isOnWebsite => code == 302;
+  // bool get isOnWebsite => code == 302;
 }
 
 extension FutureExtensions<T> on Future<HttpResponse<T>> {

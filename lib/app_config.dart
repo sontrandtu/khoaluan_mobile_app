@@ -1,6 +1,7 @@
 class AppConfig {
   AppConfig._();
   static const prefixUrl = 'http://10.0.2.2:3000/api';
+  static const prefixUrlOTP = 'http://localhost:3000/api';
   static const title = 'Fast Room';
   // static const diseaseCategoryId = 1;
   // static const channelId = "UCGK8NNm6oUCmKyDRHGD6cMw";

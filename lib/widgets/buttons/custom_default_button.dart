@@ -17,12 +17,13 @@ class CustomDefaultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: padding ?? 20),
       width: double.infinity,
       height: height ?? 50,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(horizontal: padding ?? 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           shadowColor: AppColors.textButtonColor,
         ),
         onPressed: onTap,

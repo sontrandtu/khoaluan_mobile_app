@@ -1,6 +1,14 @@
+
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:khoaluan_mobile_app/api/response_model/list_response.dart';
 import 'package:khoaluan_mobile_app/api/response_model/login_response.dart';
+import 'package:khoaluan_mobile_app/model/add_post_model.dart';
+import 'package:khoaluan_mobile_app/model/post_details_model.dart';
+import 'package:khoaluan_mobile_app/model/image_model.dart';
+import 'package:khoaluan_mobile_app/model/location_model.dart';
+import 'package:khoaluan_mobile_app/model/my_post_model.dart';
 import 'package:khoaluan_mobile_app/model/user_model.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -15,15 +23,14 @@ const int pageSize = 20;
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
-  // @POST('/auth/login')
-  // Future<HttpResponse<LoginResponse>> login({
-  //   @Part(name: "userName") String? userName,
-  //   @Part(name: "password") String? password
-  // });
-
   @POST('/auth/login')
   Future<HttpResponse<LoginResponse>> login({
     @Body() UserModel? userModel,
+  });
+
+  @POST('/auth/send_code?phoneNumber={phoneNumber}')
+  Future<HttpResponse<dynamic>> getOTP({
+    @Path('phoneNumber') String? phoneNumber
   });
 
   @GET('/user/get_info')
@@ -37,6 +44,34 @@ abstract class RestClient {
   Future<HttpResponse<ListResponse<List<PostModel>>>> getListPostByCategory({
     @Path('categoryId') String? categoryId
   });
+
+  @GET('/post/get_post_by_user')
+  Future<HttpResponse<MyPostModel>> getPostsByUser();
+
+  @GET('/post/get_post_item/{postId}')
+  Future<HttpResponse<PostDetailsModel>> getDetailsPostById({
+    @Path('postId') String? postId
+  });
+
+  @POST('/post/add_post')
+  Future<HttpResponse<AddPostModel>> addPost({
+    @Body() AddPostModel? addPostModel,
+  });
+
+  @MultiPart()
+  @POST('/images/multiple_upload')
+  Future<HttpResponse<List<ImageModel>>> addMultiImages(
+    @Part(name: 'file') List<File> listImage,
+  );
+
+  @MultiPart()
+  @POST('/images/upload')
+  Future<HttpResponse<ImageModel>> addImage({
+    @Part(name: 'file') File? image,
+  });
+
+  @GET('/place/city')
+  Future<HttpResponse<LocationModel>> getLocation();
 //
 // @GET('/comments-by-article?article_id={id}')
 // Future<HttpResponse<ListResponse<List<CommentModel>>>> getCommentsByLevel(@Path('id') int? articleId, @Query('level') int level);

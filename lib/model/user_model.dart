@@ -11,7 +11,6 @@ class UserModel {
     this.userName,
     this.password,
   });
-
   String? id;
   String? name;
   String? email;

@@ -45,7 +45,7 @@ class _SearchPostPageState extends State<SearchPostPage> {
                                 height: 40,
                                 child: Tab(
                                   child: Text(
-                                    viewModel.categories[index].nameCategories.toString(),
+                                    viewModel.categories[index].name.toString(),
                                     style: Theme.of(context).textTheme.bodyText2?.copyWith(
                                       color: AppColors.textBlack,
                                       fontWeight: FontWeight.bold

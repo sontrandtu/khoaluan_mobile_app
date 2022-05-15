@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:khoaluan_mobile_app/page_routes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../model/user_model.dart';
@@ -48,7 +49,10 @@ class _SliderLayoutState extends State<SliderLayout> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: UserInfo(userInfo: widget.userModel),
+                child: UserInfo(
+                    userInfo: widget.userModel,
+                  addPostTap: () => Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.addPostPage),
+                ),
               ),
               const SizedBox(height: 16),
               CarouselSlider.builder(

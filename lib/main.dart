@@ -5,11 +5,15 @@ import 'package:khoaluan_mobile_app/base/app_provider.dart';
 import 'package:khoaluan_mobile_app/main/main_layout.dart';
 import 'package:khoaluan_mobile_app/page_routes.dart';
 import 'package:khoaluan_mobile_app/repository/category_repository.dart';
+import 'package:khoaluan_mobile_app/repository/location_repository.dart';
 import 'package:khoaluan_mobile_app/repository/post_repository.dart';
 import 'package:khoaluan_mobile_app/repository/user_repository.dart';
+import 'package:khoaluan_mobile_app/screens/add_post/add_post_page.dart';
 import 'package:khoaluan_mobile_app/screens/list_post_page/list_post_view_model.dart';
 import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_page.dart';
 import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_view_model.dart';
+import 'package:khoaluan_mobile_app/screens/post_details/post_detail_view_model.dart';
+import 'package:khoaluan_mobile_app/screens/post_details/post_details_page.dart';
 import 'package:khoaluan_mobile_app/screens/search_post/dart/search_post_page.dart';
 import 'package:khoaluan_mobile_app/screens/search_post/dart/search_post_view_model.dart';
 import 'package:khoaluan_mobile_app/theme/color.dart';
@@ -19,6 +23,7 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 
 import 'preference/preference.dart';
+import 'screens/add_post/add_post_view_model.dart';
 import 'screens/list_post_page/list_post_page.dart';
 import 'screens/login_and_register/login/login_page.dart';
 import 'screens/login_and_register/login/login_view_model.dart';
@@ -38,6 +43,7 @@ void main() async {
       Provider(create: (_) => UserRepository()),
       Provider(create: (_) => CategoryRepository()),
       Provider(create: (_) => PostRepository()),
+      Provider(create: (_) => LocationRepository()),
       ChangeNotifierProvider(create: (_) => AppProvider())
     ],
     child: MyApp(
@@ -60,6 +66,7 @@ class MyApp extends StatelessWidget {
     final ThemeData theme = ThemeData.light();
 
     return MaterialApp(
+      navigatorKey: mainKey,
       builder: (context, child) {
         return ResponsiveWrapper.builder(
           BouncingScrollWrapper.builder(context, child!),
@@ -97,8 +104,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       routes: _pageMap(),
       initialRoute:
-      PageRoutes.rootApp
-      // isLogged ? PageRoutes.rootApp : PageRoutes.loginPage,
+      // PageRoutes.rootApp
+      isLogged ? PageRoutes.rootApp : PageRoutes.loginPage,
     );
   }
 }
@@ -125,8 +132,8 @@ _pageMap() {
     },
     PageRoutes.listPostPage: (BuildContext context) {
       return ChangeNotifierProvider(
-        create: (_) => ListPostViewModel(postRepo: context.watch()),
-        child: const ListPostPage(),
+        create: (_) => ListPostViewModel(postRepo: context.watch(), isSearch: false),
+        child: const ListPostPage(isSearch: true),
       );
     },
     PageRoutes.searchPostPage: (BuildContext context) {
@@ -135,10 +142,28 @@ _pageMap() {
         child: const SearchPostPage(),
       );
     },
+    PageRoutes.addPostPage: (BuildContext context) {
+      return ChangeNotifierProvider(
+        create: (_) => AddPostViewModel(
+          userRepo: context.read<UserRepository>(),
+          postRepo: context.watch(),
+          locationRepo: context.read<LocationRepository>(),
+          categoryRepo: context.read<CategoryRepository>(),
+        ),
+        child: const AddPostPage(),
+      );
+    },
     PageRoutes.mapPage: (BuildContext context) {
       return ChangeNotifierProvider(
         create: (_) => LoginViewModel(userRepo: context.watch()),
         child: const MapPage(),
+      );
+    },
+    PageRoutes.postDetailsPage: (BuildContext context) {
+      final arguments = ModalRoute.of(context)?.settings.arguments as String;
+      return ChangeNotifierProvider(
+        create: (_) => PostDetailsViewModel(postRepo: context.watch(), postId: arguments),
+        child: const PostDetailsPage(),
       );
     },
   };

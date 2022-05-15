@@ -25,7 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
   int currentStep = 0;
   GlobalKey<FormState> phoneNumberKey = GlobalKey<FormState>();
   GlobalKey<FormState> informationKEy = GlobalKey<FormState>();
-  late StreamController<ErrorAnimationType> errorController;
+  StreamController<ErrorAnimationType>? errorController;
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
-    errorController.close();
+    errorController!.close();
     super.dispose();
   }
 
@@ -58,22 +58,10 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Stepper(
                 currentStep: currentStep,
                 physics: const ClampingScrollPhysics(),
-                onStepContinue: () {
-                  final isLast = currentStep == 2;
-                  if(isLast){
-                    print("ạdajdjd");
-                  }else{
-                    if(phoneNumberKey.currentState!.validate()){
-                      setState(() => currentStep++);
-                    } else{
-                      context.showMessage("Bạn vui lòng điền đầy đủ thông tin", type: MessageType.error);
-                    }
-                  }
-                },
                 onStepCancel: currentStep == 0 ? null : () => setState(() => currentStep--),
                 controlsBuilder: (BuildContext context, ControlsDetails details){
                   return Container(
-                    margin: EdgeInsets.only(top: 50),
+                    margin: const EdgeInsets.only(top: 50),
                     child: Row(
                       children: [
                         Expanded(
@@ -81,10 +69,14 @@ class _RegisterPageState extends State<RegisterPage> {
                               onTap: (){
                                 final isLast = currentStep == 2;
                                 if(isLast){
-                                  print("ạdajdjd");
                                 }else{
                                   if(phoneNumberKey.currentState!.validate()){
-                                    setState(() => currentStep++);
+                                    viewModel.getOTP();
+                                    if(viewModel.isSuccess){
+                                      setState(() => currentStep++);
+                                    } else{
+                                      context.showMessage("Lấy mã OTP thất bại", type: MessageType.error);
+                                    }
                                   } else{
                                     context.showMessage("Bạn vui lòng điền đầy đủ thông tin", type: MessageType.error);
                                   }
@@ -191,7 +183,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: GestureDetector(
                             onTap: () {
                               // textEditingController.text = '';
-                              viewModel.resendOTP();
+                              // viewModel.resendOTP();
                             },
                             child: Visibility(
                               visible: viewModel.isExpired,

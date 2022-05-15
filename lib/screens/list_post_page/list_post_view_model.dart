@@ -6,10 +6,11 @@ import 'package:khoaluan_mobile_app/base/loadmore_mixin.dart';
 import '../../repository/post_repository.dart';
 
 class ListPostViewModel extends BaseViewModel with LoadMoreMixin{
+  final bool? isSearch;
   final PostRepository postRepo;
   final String? categoryId;
 
-  ListPostViewModel({required this.postRepo, this.categoryId}) : super(postRepo){
+  ListPostViewModel({required this.postRepo, this.categoryId, this.isSearch}) : super(postRepo){
     refreshData(needShowLoading: true);
   }
 

@@ -11,21 +11,21 @@ String categoryModelToJson(List<CategoryModel> data) => json.encode(List<dynamic
 class CategoryModel {
   CategoryModel({
     this.id,
-    this.nameCategories,
+    this.name,
     this.slug,
     this.createdAt,
     this.updatedAt,
   });
 
   String? id;
-  String? nameCategories;
+  String? name;
   String? slug;
   DateTime? createdAt;
   DateTime? updatedAt;
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
     id: json["id"],
-    nameCategories: json["nameCategories"],
+    name: json["nameCategories"],
     slug: json["slug"],
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
@@ -33,7 +33,7 @@ class CategoryModel {
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "nameCategories": nameCategories,
+    "nameCategories": name,
     "slug": slug,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),

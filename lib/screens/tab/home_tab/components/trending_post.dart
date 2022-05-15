@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_mobile_app/page_routes.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../model/post_model.dart';
@@ -22,7 +23,9 @@ class ListTrendingPost extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: ItemNameAndSeeAll(
             itemName: "Xu hướng",
-            seeAllTap: () {},
+            seeAllTap: () {
+              Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.listPostPage);
+            },
           ),
         ),
         SizedBox(
@@ -57,56 +60,61 @@ class ListTrendingPost extends StatelessWidget {
             padding: const EdgeInsets.only(left: 12, right: 12),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) => Container(
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomNetworkImage(
-                    url: trendingPosts[index].imageUrl,
-                    width: 200,
-                    height: 132,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          trendingPosts[index].title ?? '',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2
-                              ?.copyWith(fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                            "${trendingPosts[index].price ?? ''} VNĐ/Người",
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          trendingPosts[index].address ?? '',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2
-                              ?.copyWith(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black54),
-                        ),
-                      ],
+            itemBuilder: (context, index) => InkWell(
+              onTap: (){
+                Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.postDetailsPage, arguments: trendingPosts[index].id);
+              },
+              child: Container(
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomNetworkImage(
+                      url: trendingPosts[index].imageUrl,
+                      width: 200,
+                      height: 132,
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            trendingPosts[index].title ?? '',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                ?.copyWith(fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                              "${trendingPosts[index].price ?? ''} VNĐ/Người",
+                            style: TextStyle(
+                              color: AppColors.primaryColor,
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            trendingPosts[index].address ?? '',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                ?.copyWith(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black54),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             itemCount: 6,
