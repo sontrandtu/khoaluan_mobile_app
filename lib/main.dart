@@ -12,6 +12,7 @@ import 'package:khoaluan_mobile_app/screens/add_post/add_post_page.dart';
 import 'package:khoaluan_mobile_app/screens/list_post_page/list_post_view_model.dart';
 import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_page.dart';
 import 'package:khoaluan_mobile_app/screens/login_and_register/register/register_view_model.dart';
+import 'package:khoaluan_mobile_app/screens/map_page/map_view_model.dart';
 import 'package:khoaluan_mobile_app/screens/post_details/post_detail_view_model.dart';
 import 'package:khoaluan_mobile_app/screens/post_details/post_details_page.dart';
 import 'package:khoaluan_mobile_app/screens/search_post/dart/search_post_page.dart';
@@ -155,7 +156,7 @@ _pageMap() {
     },
     PageRoutes.mapPage: (BuildContext context) {
       return ChangeNotifierProvider(
-        create: (_) => LoginViewModel(userRepo: context.watch()),
+        create: (_) => MapViewModel(postRepo: context.watch()),
         child: const MapPage(),
       );
     },

@@ -198,7 +198,7 @@ class _TabsPageState extends State<MainLayout> with WidgetsBindingObserver {
                     case PageRoutes.roommatesTab:
                       builder = (BuildContext _) => ChangeNotifierProvider(
                           create: (_) => RoommatesViewModel(repo: context.read()),
-                          child: RoommatesTab()
+                          child: const RoommatesTab()
                       );
                       break;
                     default:
