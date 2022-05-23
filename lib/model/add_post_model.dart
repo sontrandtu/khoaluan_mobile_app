@@ -23,8 +23,8 @@ class AddPostModel {
   );
 
   Map<String, dynamic> toJson() => {
-    "info": info?.toJson(),
-    "relatedImages": List<dynamic>.from(relatedImages!.map((x) => x.toJson())),
+    "info": (info ?? Info()).toJson(),
+    "relatedImages": List<dynamic>.from((relatedImages ?? []).map((x) => x.toJson())),
   };
 }
 

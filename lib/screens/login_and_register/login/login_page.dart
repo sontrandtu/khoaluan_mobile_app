@@ -100,7 +100,9 @@ class _LoginPageState extends State<LoginPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).pushNamed(PageRoutes.forgotPasswordPage);
+                            },
                             child: const Text(
                               'Quên mật khẩu',
                               style: TextStyle(color: Colors.blue),

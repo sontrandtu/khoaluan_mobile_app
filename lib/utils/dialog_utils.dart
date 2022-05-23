@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:khoaluan_mobile_app/utils/extensions/context_extension.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../theme/color.dart';
 
 Future showPermissionDialog(BuildContext context,
@@ -31,6 +30,7 @@ Future showPermissionDialog(BuildContext context,
 
 Future showDefaultDialog(BuildContext context, {required String title, required String content, String? textNoButton, String? textYesButton, required Function()? onPressNo, required Function()? onPressYes}) {
   return showDialog(
+    useRootNavigator: false,
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: Center(child: Text(title.toUpperCase(), style: const TextStyle(color: Colors.red))),
@@ -66,6 +66,36 @@ Future showDefaultDialog(BuildContext context, {required String title, required 
               ),
               child: Text( textYesButton ?? 'Có', style: const TextStyle(fontSize: 13, fontFamily: 'Roboto', fontWeight: FontWeight.w700)),
               onPressed: onPressYes,
+            ),
+          ),
+        ],
+      )
+  );
+}
+
+Future showSingleDialog({required BuildContext context, Function()? onPress, String? textButton, String? title, String? content}){
+  return showDialog(
+      useRootNavigator: false,
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Center(child: Text((title ?? "").toUpperCase(), style: const TextStyle(color: Colors.red))),
+        content: Text(content ?? '', textAlign: TextAlign.center, style: const TextStyle(color: Colors.black87, height: 1.5)),
+        actionsAlignment: MainAxisAlignment.spaceBetween,
+        actionsPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        actions: <Widget>[
+          SizedBox(
+            height: 34,
+            width: 88,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: AppColors.primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  elevation: 0
+              ),
+              child: Text( textButton ?? 'Có', style: const TextStyle(fontSize: 13, fontFamily: 'Roboto', fontWeight: FontWeight.w700)),
+              onPressed: onPress,
             ),
           ),
         ],

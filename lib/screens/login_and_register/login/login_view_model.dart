@@ -20,7 +20,7 @@ class LoginViewModel extends BaseViewModel {
       successCallback?.call("Đăng nhập thành công");
       await PreferenceManager.setValue<String>(PreferenceManager.KEY_TOKEN, response.data?.token);
     }else{
-      errorCallback?.call(response.message.toString());
+      errorCallback?.call(response.messages.toString());
     }
   }
 }

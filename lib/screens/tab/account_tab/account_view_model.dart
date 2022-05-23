@@ -7,6 +7,17 @@ class AccountViewModel extends BaseViewModel{
 
   String text = "Account Tab";
 
+  String image = '';
+  AccountViewModel({required this.repo}) : super(repo){
+    getData();
+  }
 
-  AccountViewModel({required this.repo}) : super(repo);
+  Future<void> getData()async{
+    setLoading = true;
+    final response = await repo.getInfo();
+    if(response.isOk){
+      image = response.data?.avatarUrl ?? '';
+    }
+    setLoading = false;
+  }
 }

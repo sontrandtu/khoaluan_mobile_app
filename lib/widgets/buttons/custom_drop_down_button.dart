@@ -42,9 +42,9 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
   @override
   void didUpdateWidget(covariant CustomDropdownButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if(oldWidget.isRefresh != widget.isRefresh) {
+
+    if(oldWidget.placeholderText != widget.placeholderText){
       placeholderText = oldWidget.placeholderText;
-      selectedIndex = -1;
     }
   }
 

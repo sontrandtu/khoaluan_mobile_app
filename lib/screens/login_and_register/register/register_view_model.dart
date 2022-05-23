@@ -1,67 +1,55 @@
-import 'dart:async';
-
 import 'package:khoaluan_mobile_app/base/base_view_model.dart';
-import 'package:khoaluan_mobile_app/model/user_model.dart';
+import 'package:khoaluan_mobile_app/model/register_model.dart';
 import 'package:khoaluan_mobile_app/repository/user_repository.dart';
-import 'package:khoaluan_mobile_app/utils/toast_utils.dart';
 
 const int timerOTP = 60;
 
 class RegisterViewModel extends BaseViewModel {
   final UserRepository userRepo;
 
-  UserModel userModel = UserModel();
+  RegisterModel userModel = RegisterModel();
   String otp = '';
-  bool isSuccess = false;
+  String? hash = '';
   RegisterViewModel({required this.userRepo}) : super(userRepo);
 
-  set updateOtp(String value) {
-    otp = value;
-    notifyListeners();
-  }
-
-   Timer? _timer;
-  int start = timerOTP;
-
-  void startTimer() {
-    const oneSec = Duration(seconds: 1);
-    _timer = Timer.periodic(
-      oneSec,
-          (Timer timer) {
-        if (start == 0) {
-          notifyListeners();
-          timer.cancel();
-        } else {
-          notifyListeners();
-          start--;
-        }
-      },
-    );
-  }
-  String get remainingTime {
-    return start < 10 ? '0$start' : '$start';
-  }
-
-  bool get isExpired {
-    return start == 0;
-  }
-
-  getOTP() async {
+  getOTP({ErrorCallback? errorCallback, SuccessCallback? successCallback}) async {
     setLoading = true;
-    start = timerOTP;
-    startTimer();
-    final response = await userRepo.getOTP(phoneNumber: userModel.phoneNumber);
+    final response = await userRepo.getOTPNew(phoneNumber: userModel.phoneNumber);
     if (response.isOk) {
-      isSuccess = true;
+      hash = response.data?.messages;
+      successCallback?.call("Lấy mã xác nhận thành công");
     } else {
-      isSuccess = false;
+      errorCallback?.call(response.messages);
     }
     setLoading = false;
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _timer?.cancel();
+  verifyOTP({ErrorCallback? errorCallback, SuccessCallback? successCallback}) async {
+    setLoading = true;
+    final response = await userRepo.verifyOTP(phoneNumber: userModel.phoneNumber, otp: otp, hash: hash);
+    if (response.isOk) {
+      successCallback?.call("Tiếp tục điền các thông tin để hoàn thành đăng kí tài khoản");
+    } else {
+      errorCallback?.call(response.messages);
+    }
+    setLoading = false;
+  }
+
+  registerUser({ErrorCallback? errorCallback, SuccessCallback? successCallback}) async {
+    setLoading = true;
+    final response = await userRepo.registerUser(userModel: userModel);
+    if (response.isOk) {
+      successCallback?.call("Đăng ksi tài khoản thành công, quay lại trang đăng nhập để tiếp tục");
+    } else {
+      errorCallback?.call(response.messages);
+    }
+    setLoading = false;
+  }
+  clearData(){
+    userModel.email = '';
+    userModel.password = '';
+    userModel.phoneNumber = '';
+    userModel.name = '';
+    userModel.userName = '';
   }
 }

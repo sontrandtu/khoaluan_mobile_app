@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:khoaluan_mobile_app/model/post_model.dart';
+import 'package:khoaluan_mobile_app/page_routes.dart';
 import 'package:khoaluan_mobile_app/theme/color.dart';
 import 'package:khoaluan_mobile_app/widgets/cover_loading.dart';
 import 'package:khoaluan_mobile_app/widgets/custom_cached_network_image.dart';
@@ -52,64 +53,69 @@ class _ListPostPageState extends State<ListPostPage> {
                 padding: const EdgeInsets.symmetric( horizontal: 12, vertical: 12),
                 itemBuilder: (context, index) {
                   final PostModel post = viewModel.data[index];
-                  return Container(
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.3),
-                      gradient: LinearGradient(
-                        colors: [
-                          AppColors.primaryColor,
-                          Colors.black54,
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                  return GestureDetector(
+                    onTap: (){
+                      Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.postDetailsPage, arguments: post.id);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.3),
+                        gradient: LinearGradient(
+                          colors: [
+                            AppColors.primaryColor,
+                            Colors.black54,
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                      child: Row(
-                        children: [
-                          CustomNetworkImage(
-                              url: post.imageUrl,
-                              width: 100,
-                              height: 100,
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                    post.title ?? "",
-                                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                    ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                Text(
-                                  "${post.price ?? ""} VNĐ/tháng",
-                                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                    color: AppColors.primaryColor
-                                  ),
-                                ),
-                                Text(
-                                  post.address ?? "",
-                                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey.shade600,
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
+                        child: Row(
+                          children: [
+                            CustomNetworkImage(
+                                url: post.imageUrl,
+                                width: 100,
+                                height: 100,
                             ),
-                          ),
-                        ],
-                      ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                      post.title ?? "",
+                                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                      ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(
+                                    "${post.price ?? ""} VNĐ/tháng",
+                                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                      color: AppColors.primaryColor
+                                    ),
+                                  ),
+                                  Text(
+                                    post.address ?? "",
+                                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey.shade600,
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                    ),
                   );
                 },
                 separatorBuilder: (_, __) {

@@ -8,18 +8,18 @@ import 'package:retrofit/retrofit.dart';
 @JsonSerializable(genericArgumentFactories: true)
 class ApiResponse<T> {
   T? data;
-  String? message;
+  String? messages;
   int? code;
   dynamic error;
 
-  ApiResponse({this.data, this.code, this.message, this.error}) {
+  ApiResponse({this.data, this.code, this.messages, this.error}) {
     if (error is DioError) {
-      if (message == null || (message?.isEmpty ?? true)) {
-        message = ServerError.withDioError(error: error).errorMessage;
+      if (messages == null || (messages?.isEmpty ?? true)) {
+        messages = ServerError.withDioError(error: error).errorMessage;
       }
       return;
     } else {
-      message = error.toString();
+      messages = error.toString();
     }
   }
 
@@ -39,7 +39,7 @@ extension FutureExtensions<T> on Future<HttpResponse<T>> {
           return Future.value(ApiResponse(code: error.response?.statusCode ?? 0, error: error));
         }else{
           final String? message = error.response?.data['messages'];
-          return Future.value(ApiResponse(code: error.response?.statusCode ?? 0, error: error,message: message));
+          return Future.value(ApiResponse(code: error.response?.statusCode ?? 0, error: error,messages: message));
         }
 
       } else {

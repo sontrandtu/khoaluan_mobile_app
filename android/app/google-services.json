@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "46950932575",
+    "project_id": "khoa-luan-tot-nghiep-ef9ad",
+    "storage_bucket": "khoa-luan-tot-nghiep-ef9ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46950932575:android:88a57d6fef6daf8bf97bea",
+        "android_client_info": {
+          "package_name": "com.example.khoaluan_mobile_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "46950932575-2s734khi5cgaa2raclgh0j7ksmuuqldn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE48zTcz3T26ssRbE3Fsq2qAkOdVYE8p4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "46950932575-2s734khi5cgaa2raclgh0j7ksmuuqldn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

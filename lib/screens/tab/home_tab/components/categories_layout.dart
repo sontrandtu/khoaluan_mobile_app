@@ -58,31 +58,36 @@ class CategoriesLayOut extends StatelessWidget {
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (_, index) {
-              return Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Colors.cyan,
-                        offset: Offset(0,1),
-                        blurStyle: BlurStyle.solid
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(width: 1, color: Colors.grey.withOpacity(0.2)),
-                ),
-                child: Text(
-                  categories[index].name ?? '',
-                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+              return GestureDetector(
+                onTap: (){
+                  Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.postByCategoryPage, arguments: categories[index]);
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.cyan,
+                          offset: Offset(0,1),
+                          blurStyle: BlurStyle.solid
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(width: 1, color: Colors.grey.withOpacity(0.2)),
                   ),
-                  textAlign: TextAlign.center,
+                  child: Text(
+                    categories[index].name ?? '',
+                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               );
             },
-            itemCount: categories.length,
+            itemCount: 2,
             gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

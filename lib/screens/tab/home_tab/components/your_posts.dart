@@ -7,12 +7,12 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../theme/color.dart';
 import 'item_name_and_see_all.dart';
 
-class YourPosts extends StatelessWidget {
-  final List<PostModel> yourPosts;
+class LatestPost extends StatelessWidget {
+  final List<PostModel> latestPost;
 
-  const YourPosts({
+  const LatestPost({
     Key? key,
-    required this.yourPosts,
+    required this.latestPost,
   }) : super(key: key);
 
   @override
@@ -22,13 +22,13 @@ class YourPosts extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: ItemNameAndSeeAll(
-            itemName: "Dành cho bạn",
+            itemName: "Tin mới nhất",
             seeAllTap: () {
               Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.listPostPage);
             },
           ),
         ),
-        yourPosts.isEmpty ? Shimmer.fromColors(
+        latestPost.isEmpty ? Shimmer.fromColors(
           baseColor: Colors.grey[300]!,
           highlightColor: Colors.grey[100]!,
           child: ListView.separated(
@@ -59,7 +59,7 @@ class YourPosts extends StatelessWidget {
           itemBuilder: (_, index) {
             return InkWell(
               onTap: (){
-                Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.postDetailsPage, arguments: yourPosts[index].id);
+                Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.postDetailsPage, arguments: latestPost[index].id);
               },
               child: Container(
                 height: 132,
@@ -73,7 +73,7 @@ class YourPosts extends StatelessWidget {
                 child: Row(
                   children: [
                     CustomNetworkImage(
-                        url: yourPosts[index].imageUrl,
+                        url: latestPost[index].imageUrl,
                       width: 100,
                       height: 100,
                     ),
@@ -85,7 +85,7 @@ class YourPosts extends StatelessWidget {
                           Align(
                             alignment: Alignment.centerRight,
                             child: Text(
-                              "${yourPosts[index].price ?? ''} VNĐ/Người",
+                              "${latestPost[index].price ?? ''} VNĐ/Người",
                               style: TextStyle(
                                   color: AppColors.primaryColor,
                                   fontWeight: FontWeight.bold
@@ -94,7 +94,7 @@ class YourPosts extends StatelessWidget {
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            yourPosts[index].title ?? '',
+                            latestPost[index].title ?? '',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context)
@@ -104,7 +104,7 @@ class YourPosts extends StatelessWidget {
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            yourPosts[index].address ?? '',
+                            latestPost[index].address ?? '',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context)
@@ -120,7 +120,7 @@ class YourPosts extends StatelessWidget {
               ),
             );
           },
-          itemCount: 4,
+          itemCount: latestPost.length,
           separatorBuilder: (_, __) {
             return const SizedBox(width: 12);
           },

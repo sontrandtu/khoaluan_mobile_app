@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khoaluan_mobile_app/screens/tab/account_tab/account_view_model.dart';
+import 'package:khoaluan_mobile_app/utils/dialog_utils.dart';
+import 'package:khoaluan_mobile_app/widgets/custom_cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 import '../../../page_routes.dart';
@@ -28,53 +30,69 @@ class _AccountTabState extends State<AccountTab> {
           builder: (context, viewModel, child) => Center(
             child: SingleChildScrollView(
                 child: Column(
-              children: [
-                CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/placeholder.png"),
-                  radius: 40,
-                ),
-                const SizedBox(height: 32),
-                ProfileItem(
-                  head: Icons.manage_accounts_outlined,
-                  title: "Thông tin tài khoản",
-                  onTap: () {},
-                  tail: Icons.arrow_forward_ios_outlined,
-                ),
-                const SizedBox(height: 16),
-                ProfileItem(
-                  head: Icons.list_alt_outlined,
-                  title: "Bài đăng của tôi",
-                  onTap: () {},
-                  tail: Icons.arrow_forward_ios_outlined,
-                ),
-                const SizedBox(height: 16),
-                ProfileItem(
-                  head: Icons.settings_outlined,
-                  title: "Cài đặt",
-                  onTap: () {},
-                  tail: Icons.arrow_forward_ios_outlined,
-                ),
-                const SizedBox(height: 16),
-                ProfileItem(
-                  head: Icons.shield_outlined,
-                  title: "Điều khoản sử dụng",
-                  onTap: () {},
-                  tail: Icons.arrow_forward_ios_outlined,
-                ),
-                const SizedBox(height: 16),
-                // CustomNetworkImage(url: url, width: width, height: height)
-                ProfileItem(
-                  head: Icons.logout_outlined,
-                  title: "Đăng xuất",
-                  onTap: () {
-                    PreferenceManager.logOut();
-                    Navigator.of(context, rootNavigator: true)
-                        .pushNamedAndRemoveUntil(
-                            PageRoutes.loginPage, (route) => false);
-                  },
-                )
-              ],
-            )),
+                  children: [
+                    CustomNetworkImage(url: viewModel.image, width: 60, height: 60, isCircle: true),
+                    const SizedBox(height: 32),
+                    ProfileItem(
+                      head: Icons.manage_accounts_outlined,
+                      title: "Thông tin tài khoản",
+                      onTap: () {
+                        Navigator.of(context, rootNavigator:  true).pushNamed(PageRoutes.updateUser).then((value) => viewModel.getData());
+                      },
+                      tail: Icons.arrow_forward_ios_outlined,
+                    ),
+                    const SizedBox(height: 16),
+                    ProfileItem(
+                      head: Icons.list_alt_outlined,
+                      title: "Bài đăng của tôi",
+                      onTap: () {
+                        Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.listMyPostPage);
+                      },
+                      tail: Icons.arrow_forward_ios_outlined,
+                    ),
+                    const SizedBox(height: 16),
+                    ProfileItem(
+                      head: Icons.settings_outlined,
+                      title: "Đổi mật khẩu",
+                      onTap: () {
+                        Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.changePasswordPage);
+                      },
+                      tail: Icons.arrow_forward_ios_outlined,
+                    ),
+                    const SizedBox(height: 16),
+                    ProfileItem(
+                      head: Icons.settings_outlined,
+                      title: "Đổi số điện thoại",
+                      onTap: () {
+                        Navigator.of(context, rootNavigator: true).pushNamed(PageRoutes.changPhoneNumberPage);
+                      },
+                      tail: Icons.arrow_forward_ios_outlined,
+                    ),
+                    const SizedBox(height: 16),
+                    // CustomNetworkImage(url: url, width: width, height: height)
+                    ProfileItem(
+                      head: Icons.logout_outlined,
+                      title: "Đăng xuất",
+                      onTap: () {
+                        showDefaultDialog(
+                          context,
+                          title: "Đăng xuất",
+                          content: "Bạn có muốn đăng xuất?",
+                          onPressNo: (){
+                            Navigator.of(context).pop();
+                          },
+                          onPressYes: (){
+                            PreferenceManager.logOut();
+                            Navigator.of(context, rootNavigator: true)
+                                .pushNamedAndRemoveUntil(
+                                PageRoutes.loginPage, (route) => false);
+                          },
+                        );
+
+                      },
+                    )
+                  ],
+                )),
           ),
         ),
       ),

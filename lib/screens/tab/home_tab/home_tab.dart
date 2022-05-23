@@ -6,7 +6,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'components/categories_layout.dart';
 import 'components/slider_layout.dart';
-import 'components/trending_post.dart';
 import 'components/your_posts.dart';
 
 class HomeTab extends StatefulWidget {
@@ -23,7 +22,7 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0EAEA),
+      backgroundColor: const Color(0xFFEFCCCC).withOpacity(0.4),
       body: Consumer<HomeViewModel>(
         builder: (context, viewModel, child) => SmartRefresher(
           controller: _refreshController,
@@ -46,9 +45,9 @@ class _HomeTabState extends State<HomeTab> {
                 SliderLayout(
                   userModel: viewModel.user,
                   images: const [
-                    "http://10.0.2.2:3000/api/images/1651069355697.jpg",
-                    "http://10.0.2.2:3000/api/images/1651069355697.jpg",
-                    "http://10.0.2.2:3000/api/images/1651069355697.jpg",
+                    "assets/images/slider_1.png",
+                    "assets/images/slider_2.png",
+                    "assets/images/slider_3.png",
                   ],
                 ),
                 Column(
@@ -56,8 +55,7 @@ class _HomeTabState extends State<HomeTab> {
                     CategoriesLayOut(
                       categories: viewModel.categories,
                     ),
-                    ListTrendingPost(trendingPosts: viewModel.trendingPosts),
-                    YourPosts(yourPosts: viewModel.yourPosts),
+                    LatestPost(latestPost: viewModel.latestPost),
                     const SizedBox(height: 80),
                   ],
                 ),

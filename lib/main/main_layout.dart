@@ -214,7 +214,7 @@ class _TabsPageState extends State<MainLayout> with WidgetsBindingObserver {
                 switch (settings.name) {
                   case PageRoutes.myPostTab:
                     builder = (BuildContext _) => ChangeNotifierProvider(
-                        create: (_) => MyPostViewModel(postRepo: context.read()),
+                        create: (_) => MyPostViewModel(postRepo: context.read(), userRepo: context.read<UserRepository>()),
                         child: const MyPostTab()
                     );
                     break;

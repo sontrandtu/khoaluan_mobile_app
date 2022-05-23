@@ -16,11 +16,11 @@ class MyPostModel {
     this.totalData,
   });
 
-  List<PostDatum>? postData;
+  List<DataPost>? postData;
   int? totalData;
 
   factory MyPostModel.fromJson(Map<String, dynamic> json) => MyPostModel(
-    postData: List<PostDatum>.from(json["postData"].map((x) => PostDatum.fromJson(x))),
+    postData: List<DataPost>.from(json["postData"].map((x) => DataPost.fromJson(x))),
     totalData: json["totalData"],
   );
 
@@ -30,8 +30,8 @@ class MyPostModel {
   };
 }
 
-class PostDatum {
-  PostDatum({
+class DataPost {
+  DataPost({
     this.id,
     this.cityId,
     this.districtId,
@@ -62,7 +62,7 @@ class PostDatum {
   String? description;
   String? infoConnect;
   int? price;
-  dynamic? countDay;
+  dynamic countDay;
   String? objectId;
   String? imagePost;
   bool? status;
@@ -73,7 +73,7 @@ class PostDatum {
   String? userId;
   List<RelatedImagesList>? relatedImagesLists;
 
-  factory PostDatum.fromJson(Map<String, dynamic> json) => PostDatum(
+  factory DataPost.fromJson(Map<String, dynamic> json) => DataPost(
     id: json["id"],
     cityId: json["cityId"],
     districtId: json["districtId"],

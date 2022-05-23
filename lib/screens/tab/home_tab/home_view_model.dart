@@ -16,8 +16,7 @@ class HomeViewModel extends BaseViewModel{
   PostRepository postRepo;
 
   List<CategoryModel> categories = [];
-  List<PostModel> yourPosts = [];
-  List<PostModel> trendingPosts = [];
+  List<PostModel> latestPost = [];
   UserModel user = UserModel();
   HomeViewModel({required this.userRepository, required this.repo, required this.categoryRepo, required this.postRepo}) : super(repo) {
     loadData();
@@ -29,13 +28,12 @@ class HomeViewModel extends BaseViewModel{
     if(response[0].isOk){
       categories = response[0].data as List<CategoryModel>;
     }else{
-      errorCallback?.call(response[0].message);
+      errorCallback?.call(response[0].messages);
     }
     if(response[1].isOk){
-      yourPosts = (response[1] as ApiResponse<ListResponse<List<PostModel>>>).data?.data ?? [];
-      trendingPosts = (response[1] as ApiResponse<ListResponse<List<PostModel>>>).data?.data ?? [];
+      latestPost = (response[1] as ApiResponse<ListResponse<List<PostModel>>>).data?.data ?? [];
     }else{
-      errorCallback?.call(response[0].message);
+      errorCallback?.call(response[0].messages);
     }
     if(response[2].isOk){
       user = response[2].data as UserModel;

@@ -5,7 +5,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../model/user_model.dart';
 import '../../../../theme/color.dart';
-import '../../../../widgets/custom_cached_network_image.dart';
 import 'user_infor_widget.dart';
 
 class SliderLayout extends StatefulWidget {
@@ -58,7 +57,13 @@ class _SliderLayoutState extends State<SliderLayout> {
               CarouselSlider.builder(
                 itemCount: widget.images.length,
                 itemBuilder: (context, index, realIndex) {
-                  return CustomNetworkImage(url: widget.images.isEmpty ? '' : widget.images[index], width: 355, height: 160, circular: 8, isPlaceholderImage: false);
+                  return SizedBox(
+                    width: 340,
+                    height: 160,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(widget.images[index], fit: BoxFit.cover)),
+                  );
                 },
                 options: CarouselOptions(
                   height: 160,
