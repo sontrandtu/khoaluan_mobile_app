@@ -18,7 +18,7 @@ class _MapPageState extends State<MapPage> {
   late GoogleMapController controller;
   final CameraPosition _myLocation = const CameraPosition(
     target: LatLng(16.053659, 108.1706108),
-    zoom: 14.4746,
+    zoom: 16,
   );
 
   @override
@@ -66,7 +66,7 @@ class _MapPageState extends State<MapPage> {
             }
             controller.animateCamera(
               CameraUpdate.newCameraPosition(
-                CameraPosition(target: onLatLng, zoom: 14),
+                CameraPosition(target: onLatLng, zoom: 16),
               ),
             );
           },

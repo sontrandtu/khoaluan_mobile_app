@@ -24,7 +24,7 @@ class HomeViewModel extends BaseViewModel{
 
   Future<void> loadData({VoidCallback? onLoadedCallback, ErrorCallback? errorCallback}) async{
     setLoading = true;
-    final response = await Future.wait([categoryRepo.getCategories(),postRepo.getListPostByCategory(categoryId: "all"), userRepository.getInfo()]);
+    final response = await Future.wait([categoryRepo.getCategories(),postRepo.getLatestPost(), userRepository.getInfo()]);
     if(response[0].isOk){
       categories = response[0].data as List<CategoryModel>;
     }else{

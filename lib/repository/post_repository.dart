@@ -17,6 +17,9 @@ class PostRepository extends Repository {
   }) async {
     return await apiClient!.getListPostByCategory(categoryId: categoryId).wrap();
   }
+  Future<ApiResponse<ListResponse<List<PostModel>>>> getLatestPost() async {
+    return await apiClient!.getLatestPost().wrap();
+  }
 
   Future<ApiResponse<MyPostModel>> getPostsByUser({String? userId}) async {
     return await apiClient!.getPostsByUser(userId: userId).wrap();

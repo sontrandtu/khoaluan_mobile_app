@@ -50,7 +50,14 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 30),
                         CustomInputField(
-                          labelWidget: const Text('Tên đăng nhập'),
+                          labelWidget: RichText(
+                            text: TextSpan(
+                              children: [
+                                const TextSpan(text: '* ', style: TextStyle(color: Colors.red,fontWeight: FontWeight.w400, fontFamily: 'Roboto', fontSize: 14)),
+                                TextSpan(text: 'Tên đăng nhập',style: TextStyle(color: Colors.black.withOpacity(0.4), fontFamily: 'Roboto', fontSize: 14),),
+                              ],
+                            ),
+                          ),
                           validator: (String? value) {
                             if (value!.isEmpty) {
                               return 'Vui lòng nhập tên tài khoản';
@@ -64,7 +71,14 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 20),
                         CustomInputField(
-                          labelWidget: const Text('Mật khẩu'),
+                          labelWidget: RichText(
+                            text: TextSpan(
+                              children: [
+                                const TextSpan(text: '* ', style: TextStyle(color: Colors.red,fontWeight: FontWeight.w400, fontFamily: 'Roboto', fontSize: 14)),
+                                TextSpan(text: 'Mật khẩu',style: TextStyle(color: Colors.black.withOpacity(0.4), fontFamily: 'Roboto', fontSize: 14),),
+                              ],
+                            ),
+                          ),
                           obscureText: true,
                           validator: (String? value) {
                             if (value!.isEmpty) {
